@@ -31,12 +31,9 @@ export class ToDoListComponent extends React.Component<{}, ToDoListComponentStat
     render()
     {
         return (
-            <ul>
-                { this.state.list.map(i => (
-                    <li onClick={ () => this._toDoList.Toggle(i.id) }
-                        key={ i.id }>{ i.name } [{ i.isDone ? 'v' : 'x' }]</li>
-                )) }
-            </ul>
+            <div>
+                { i.isDone ? 'v' : 'x' }
+            </div>
         );
     }
 }
