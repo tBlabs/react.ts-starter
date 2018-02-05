@@ -14,24 +14,42 @@
     "test:watch": "jest --watch"
   },
   "jest": {
-    "setupFiles": ["<rootDir>/config/test-shim.js", "<rootDir>/config/test-setup.js"],
-    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "setupFiles": [
+      "<rootDir>/config/test-shim.js",
+      "<rootDir>/config/test-setup.js"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/config/test-preprocessor.js"
     },
-    "testMatch": ["**/__tests__/*.(test|spec).(ts|tsx|js)"]
+    "testMatch": [
+      "**/__tests__/*.(test|spec).(ts|tsx|js)"
+    ]
   },
-  "keywords": ["Typescript", "React", "Parcel"],
+  "keywords": [
+    "Typescript",
+    "React",
+    "Parcel"
+  ],
   "author": "Ahn Dohyung",
   "license": "MIT",
   "dependencies": {
     "@types/react": "^16.0.29",
     "@types/react-dom": "^16.0.3",
+    "inversify": "^4.10.0",
+    "inversify-inject-decorators": "^3.1.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "reflect-metadata": "^0.1.12",
+    "rxjs": "^5.5.6"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.5",
+    "@types/inversify-inject-decorators": "^2.0.0",
     "@types/jest": "^21.1.8",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",

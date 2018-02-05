@@ -1,6 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "types": [
+      "reflect-metadata"
+    ],
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
     "module": "commonjs",
     "strict": true,
     "jsx": "react"
