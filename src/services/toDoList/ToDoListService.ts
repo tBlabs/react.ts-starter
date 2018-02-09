@@ -33,4 +33,14 @@ export class ToDoListService implements IToDoListService
 
         this.items$.next(this.items);
     }
+
+    public SetText(id: number, newName: string): void
+    {
+        const task: ToDoTask | undefined = this.items.find((i: ToDoTask) => i.id === id);
+        if (task === undefined) throw new Error('Data corruption');
+
+        task.text = newName;
+
+        this.items$.next(this.items);
+    }
 }

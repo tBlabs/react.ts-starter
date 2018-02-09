@@ -3,6 +3,7 @@ import { ToDoListService } from "../services/toDoList/ToDoListService";
 import * as React from "react";
 import { Types } from './../IoC/Types';
 import { ToDoTask } from "../models/ToDoTask";
+import { ToDoTaskComponent } from "./ToDoTaskComponent";
 
 interface ToDoListComponentState
 {
@@ -21,7 +22,10 @@ export class ToDoListComponent extends React.Component<{}, ToDoListComponentStat
         super(props);
 
         this.state = this.initialState;
+    }
 
+    componentDidMount()
+    {
         this._toDoList.Items.subscribe((items) =>
         {
             this.setState({ list: items });
@@ -31,12 +35,9 @@ export class ToDoListComponent extends React.Component<{}, ToDoListComponentStat
     render()
     {
         return (
-            <ul>
-                { this.state.list.map(i => (
-                    <li onClick={ () => this._toDoList.Toggle(i.id) }
-                        key={ i.id }>{ i.name } [{ i.isDone ? 'v' : 'x' }]</li>
-                )) }
-            </ul>
+            <div>
+                { this.state.list.map((t: ToDoTask) => <ToDoTaskComponent key={ t.id } task={ t } />) }
+            </div>
         );
     }
 }

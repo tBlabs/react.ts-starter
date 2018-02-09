@@ -5,4 +5,5 @@ export interface IToDoListService
 {
     Items: Rx.Subject<ToDoTask[]>;
     Add(item: string): void;
+    SetText(id: number, newName: string): void;
 }

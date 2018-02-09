@@ -3,13 +3,13 @@ import { guid } from './../types/guid';
 export class ToDoTask
 {
     id: number;
-    name: string;
+    text: string;
     isDone: boolean;
 
-    constructor(name: string)
+    constructor(text: string)
     {
-        this.id = Math.random(); // TODO: remove this ugly simplification in future
-        this.name = name;
+        this.id = Math.random(); // TODO: move outside
+        this.text = text;
         this.isDone = false;
     }
 }
