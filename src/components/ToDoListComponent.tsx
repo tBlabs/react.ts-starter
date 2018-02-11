@@ -7,49 +7,26 @@ import { ToDoTaskComponent } from "./ToDoTaskComponent";
 import { TextField } from 'material-ui';
 import { IToDoListService } from "../services/toDoList/IToDoListService";
 import { Subscription } from 'rxjs/Subscription';
+import { IToDoListPresenter } from "../presenters/IToDoListPresenter";
 
-interface ToDoListComponentState
+export class ToDoListComponent extends React.Component<{}, {}>
 {
-    list: ToDoTask[];
-}
+    @LazyInject(Types.IToDoListPresenter)
+    private _list: IToDoListPresenter;
 
-export class ToDoListComponent extends React.Component<{}, ToDoListComponentState>
-{
-    @LazyInject(Types.IToDoListService)
-    private _toDoList: IToDoListService;
-
-    filter: TextField;
-    private toDoListSubscription: Subscription;
-
-    private initialState = { list: [] };
-
-    constructor(props: {})
-    {
-        super(props);
-
-        this.state = this.initialState;
-    }
+    private listSubscription: Subscription;
 
     componentDidMount()
     {
-        this.toDoListSubscription = this._toDoList.Items$.subscribe((items: ToDoTask[]) =>
+        this.listSubscription = this._list.Items$.subscribe((items: ToDoTask[]) =>
         {
-            const filter = this.filter.getValue();
-
-            this.setState({ list: items.filter((i: ToDoTask) => i.text.includes(filter)) });
-        });
+            this.forceUpdate();
+        })
     }
 
     componentWillUnmount()
     {
-        this.toDoListSubscription.unsubscribe();
-    }
-
-    private FilterTextField_Changed(filter: string): void
-    {
-        const items = this._toDoList.Items.filter((i: ToDoTask) => i.text.includes(filter));
-
-        this.setState({ list: items });
+        this.listSubscription.unsubscribe();
     }
 
     render()
@@ -58,11 +35,10 @@ export class ToDoListComponent extends React.Component<{}, ToDoListComponentStat
             <div>
                 <TextField
                     name="filter"
-                    ref={ (input: TextField) => this.filter = input }
                     hintText="Filter"
-                    onChange={ (event) => this.FilterTextField_Changed((event.target as any).value) }
+                    onChange={ (event) => this._list.SetFilter((event.target as any).value) }
                 />
-                { this.state.list.map((t: ToDoTask) => <ToDoTaskComponent key={ t.id } task={ t } />) }
+                { this._list.Items$.value.map((t: ToDoTask) => <ToDoTaskComponent key={ t.id } task={ t } />) }
             </div>
         );
     }
