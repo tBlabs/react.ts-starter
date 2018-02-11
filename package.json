@@ -8,9 +8,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "develop": "parcel ./src/index.html",
+    "serve": "parcel ./src/index.html --no-cache",
     "build": "parcel build ./src/index.html --public-url '/'",
-    "test": "jest",
+    "test": "parcel -h",
     "test:watch": "jest --watch"
   },
   "jest": {
@@ -38,7 +38,7 @@
   "author": "Ahn Dohyung",
   "license": "MIT",
   "dependencies": {
-    "@types/react": "^16.0.29",
+    "@types/react": "^16.0.36",
     "@types/react-dom": "^16.0.3",
     "inversify": "^4.10.0",
     "inversify-inject-decorators": "^3.1.0",
@@ -49,22 +49,22 @@
     "rxjs": "^5.5.6"
   },
   "devDependencies": {
-    "@types/enzyme": "^3.1.5",
+    "@types/enzyme": "^3.1.8",
     "@types/inversify-inject-decorators": "^2.0.0",
-    "@types/jest": "^21.1.8",
+    "@types/jest": "^22.1.2",
     "@types/material-ui": "^0.20.5",
-    "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.0",
-    "jest": "^21.2.1",
-    "parcel-bundler": "^1.2.0",
-    "parcel-plugin-typescript": "^0.2.0-angular.0",
-    "prettier": "^1.9.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.2.2",
+    "parcel-bundler": "^1.5.1",
+    "parcel-plugin-typescript": "^0.5.3",
+    "prettier": "^1.10.2",
     "react-test-renderer": "^16.2.0",
-    "ts-jest": "^21.2.4",
-    "tslint": "^5.8.0",
-    "tslint-config-airbnb": "^5.4.2",
-    "tslint-config-prettier": "^1.6.0",
-    "tslint-react": "^3.2.0",
-    "typescript": "^2.6.2"
+    "ts-jest": "^22.0.3",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.6.0",
+    "tslint-config-prettier": "^1.7.0",
+    "tslint-react": "^3.4.0",
+    "typescript": "^2.7.1"
   }
 }

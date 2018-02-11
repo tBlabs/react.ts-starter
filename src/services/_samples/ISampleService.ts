@@ -1,4 +1,4 @@
 export interface ISampleService
 {
-    Method();
+    Method(): void;
 }
