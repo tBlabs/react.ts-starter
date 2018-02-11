@@ -1,0 +1,1 @@
+export type SnackBarAction = (args?: any) => Promise<void>;

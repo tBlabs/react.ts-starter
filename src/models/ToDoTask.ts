@@ -6,10 +6,10 @@ export class ToDoTask
     text: string;
     isDone: boolean;
 
-    constructor(text: string)
+    constructor(text: string, isDone?: boolean)
     {
         this.id = Math.random(); // TODO: move outside
         this.text = text;
-        this.isDone = false;
+        this.isDone = isDone !== undefined ? true : false;
     }
 }

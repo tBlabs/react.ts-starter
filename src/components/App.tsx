@@ -25,10 +25,9 @@ export class App extends React.Component<{}, {}>
 
   componentDidMount()
   {
-    console.log('App.didMount' + Math.random());
-    this._snack.Info('Hello!' + Math.random());
+    this._snack.Info('Hello!');
 
-    this._toDoList.Items$.subscribe(() =>
+    this.listSubscription = this._toDoList.Items$.subscribe(() =>
     {
       this.forceUpdate();
     });

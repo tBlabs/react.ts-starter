@@ -5,6 +5,7 @@ import { TextField } from 'material-ui';
 import { ISnackBar } from '../../services/snackBar/ISnackBar';
 import { Types } from '../../IoC/Types';
 import { LazyInject } from '../../IoC/IoC';
+import { Subscription } from 'rxjs';
 
 interface SnackBarComponentState
 {
@@ -23,6 +24,8 @@ export class SnackBarComponent extends React.Component<{}, SnackBarComponentStat
         this.state = { visible: false };
     }
 
+    private snackSubscription: Subscription;
+
     componentDidMount()
     {
         this._snack.IsOpen.subscribe((isOpen) => 
@@ -31,20 +34,32 @@ export class SnackBarComponent extends React.Component<{}, SnackBarComponentStat
         });
     }
 
+    componentWillUnmount()
+    {
+        this.snackSubscription.unsubscribe();
+    }
+
+    private Snackbar_ActionClicked()
+    {
+        this._snack.Action();
+        this.setState({ visible: false });
+    }
+
     render()
     {
-        console.log('snack render');
         return (
             <Snackbar
                 open={ this.state.visible }
                 message={ this._snack.Text }
-                autoHideDuration={ 1200 }
+                autoHideDuration={ 4200 }
                 onRequestClose={
                     (reason: "timeout" | "clickaway") =>
                     {
                         this.setState({ visible: false });
                     }
                 }
+                action={ this._snack.ActionText }
+                onActionClick={ () => this.Snackbar_ActionClicked() }
             />
         );
     }
