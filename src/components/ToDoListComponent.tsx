@@ -12,16 +12,22 @@ import { IToDoListPresenter } from "../presenters/IToDoListPresenter";
 export class ToDoListComponent extends React.Component<{}, {}>
 {
     @LazyInject(Types.IToDoListPresenter)
-    private _list: IToDoListPresenter;
+    private _toDoListPresenter: IToDoListPresenter;
 
     private listSubscription: Subscription;
 
     componentDidMount()
     {
-        this.listSubscription = this._list.Items$.subscribe((items: ToDoTask[]) =>
+        // this._list.Filter$.subscribe((filter: string) =>
+        // {
+        //     console.log('filter sub');
+        //     this.forceUpdate();
+        // });
+        this.listSubscription = this._toDoListPresenter.Items$.subscribe((items: ToDoTask[]) =>
         {
             this.forceUpdate();
-        })
+        });
+
     }
 
     componentWillUnmount()
@@ -31,14 +37,17 @@ export class ToDoListComponent extends React.Component<{}, {}>
 
     render()
     {
+
+        console.log('todolist cmp. render filter', this._toDoListPresenter.Filter$.value.length, '.');
         return (
             <div>
                 <TextField
                     name="filter"
                     hintText="Filter"
-                    onChange={ (event) => this._list.SetFilter((event.target as any).value) }
+                    value={ this._toDoListPresenter.Filter$.value }
+                    onChange={ (event) => this._toDoListPresenter.SetFilter((event.target as any).value) }
                 />
-                { this._list.Items$.value.map((t: ToDoTask) => <ToDoTaskComponent key={ t.id } task={ t } />) }
+                { this._toDoListPresenter.Items$.value.map((t: ToDoTask) => <ToDoTaskComponent key={ t.id } task={ t } />) }
             </div>
         );
     }

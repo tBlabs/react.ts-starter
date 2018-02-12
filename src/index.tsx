@@ -3,6 +3,8 @@ import * as ReactDOM from "react-dom";
 
 import { App } from "./components/App";
 
+console.log('FULL RELOAD');
+
 ReactDOM.render(
   <div>
     <App />

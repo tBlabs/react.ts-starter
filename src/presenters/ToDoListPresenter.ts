@@ -42,7 +42,7 @@ export class ToDoListPresenter implements IToDoListPresenter
     public SetFilter(text: string): void
     {
         this.Filter$.next(text);
-
+        // console.log('setfilter', this.Filter$.value);
         this.FilterItemsAndPush(this._toDoList.Items$.value, text);
     }
 }
