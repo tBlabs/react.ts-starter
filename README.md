@@ -1,3 +1,44 @@
+# Router
+
+## Locations list
+
+enum Location
+{
+    SampleLocation1,
+    SampleLocation2,
+    SampleLocation3
+}
+
+## Jump to location
+
+_router.JumpTo(Location.SampleLocation)
+
+## Is in location
+
+_router.Is(Location.SampleLocation)
+
+## Router params for component
+
+interface SampleComponentRouterParams
+{
+    foo: string;
+    bar: number;
+}
+
+## Get params from location in component
+
+@Inject(..) _locatorParams: IComponentLocatorParams<SampleComponentParams>;
+
+_locatorParams.subscribe
+
+## Set params in location
+
+_locator.Set()
+
+
+
+
+
 # Typescript + React + Parcel = ❤️ 
 
 This repository has basic settings for buildling react application in Typescript.

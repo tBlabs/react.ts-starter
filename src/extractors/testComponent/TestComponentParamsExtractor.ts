@@ -43,7 +43,8 @@ import 'reflect-metadata';
 
 
 @injectable()
-export class TestComponentParamsExtractor// extends ParamsExtractor implements ITestComponentParams
+export class TestComponentParamsExtractor// extends ParamsExtractor 
+    implements ITestComponentParams
 {
     public Params$: BehaviorSubject<TestComponentParams> = new BehaviorSubject<TestComponentParams>(new TestComponentParams()); // TODO: Would be great to move this to super class but there is a problem with creation BehaviorSubject<T>(INSTANCE) (concrete type by generic)
 

@@ -22,10 +22,7 @@ export class TasksListContainerComponent extends React.Component<{}, {}>
 
     componentDidMount()
     {
-        this.listSubscription = this._tasksList.Items$.subscribe(() =>
-        {
-            this.forceUpdate();
-        });
+        this.listSubscription = this._tasksList.Items$.subscribe(() => this.forceUpdate());
     }
 
     componentWillUnmount()

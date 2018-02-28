@@ -33,6 +33,13 @@ export class Location implements ILocation
         this.Url$.next(url);
     }
 
+    // public Set(key: string, value: string)
+    public Set(url: string): void
+    {
+
+        history.pushState(null, url, url);
+    }
+
     public UrlIs(url: string): boolean
     {
         return this.Url$.value === url;

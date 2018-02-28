@@ -13,6 +13,7 @@ import { Location } from '../services/location/Location';
 import { ILocation } from '../services/location/ILocation';
 import { TestComponent } from './TestComponent';
 import { TasksListContainerComponent } from './tasks/TasksListContainerComponent';
+import { JumpComponent } from './jump/JumpComponent';
 
 export class App extends React.Component<{}, {}>
 {
@@ -56,16 +57,12 @@ export class App extends React.Component<{}, {}>
             onClick={ () => this._location.JumpTo('/url/with/params/bar/2414/false') }
             label="bar.."
           />
-          <RaisedButton
-            onClick={ () => this._location.JumpTo('/home/43') }
-            label="Home/43"
-          />
-          <RaisedButton
-            onClick={ () => this._location.JumpTo('/todo') }
-            label="todo"
-          />
+          <JumpComponent label="home/43" jumpTo="/home/43" />
+          <JumpComponent label="todo" jumpTo="/todo" />
+          <JumpComponent label="123" jumpTo="/123" />
           { this._location.UrlBeginsWith('/url/with/params') && <div><TestComponent /></div> }
           { this._location.UrlIs('/home/me') && <p>only if /home/me</p> }
+          {/* { this._location.Is(Location.SampleLocation) && <p>Sample Location</p> } */ }
           <hr />
           { this._location.UrlIs('/todo') && <TasksListContainerComponent /> }
           <SnackBarComponent />
