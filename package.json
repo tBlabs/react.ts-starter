@@ -1,12 +1,13 @@
 {
   "name": "react.ts-starter",
   "version": "1.0.0",
-  "description": "Typescript with React, using parcel bundler",
+  "description": "Typescript with React, using Parcel bundler",
   "main": "index.js",
   "scripts": {
-    "serve": "parcel ./src/index.html --no-cache",
+    "serve": "parcel ./src/index.html",
     "build": "parcel build ./src/index.html --public-url '/'",
-    "test": "parcel -h",
+    "help": "parcel --help",
+    "test": "jest",
     "test:watch": "jest --watch"
   },
   "jest": {
@@ -23,7 +24,7 @@
       "^.+\\.(ts|tsx)$": "<rootDir>/config/test-preprocessor.js"
     },
     "testMatch": [
-      "**/__tests__/*.(test|spec).(ts|tsx|js)"
+      "**/(_tests|_proofs)/*.(test|spec).(ts|tsx|js)"
     ]
   },
   "keywords": [
@@ -34,8 +35,7 @@
   "author": "tB",
   "license": "beerware",
   "dependencies": {
-    "@types/react": "^16.0.36",
-    "@types/react-dom": "^16.0.3",
+    "babel-polyfill": "^6.26.0",
     "inversify": "^4.10.0",
     "inversify-inject-decorators": "^3.1.0",
     "material-ui": "^0.20.0",
@@ -45,22 +45,25 @@
     "rxjs": "^5.5.6"
   },
   "devDependencies": {
-    "@types/enzyme": "^3.1.8",
+    "@types/enzyme": "^3.1.9",
     "@types/inversify-inject-decorators": "^2.0.0",
-    "@types/jest": "^22.1.2",
-    "@types/material-ui": "^0.20.5",
+    "@types/jasmine": "^2.8.6",
+    "@types/jest": "^22.1.3",
+    "@types/material-ui": "^0.20.7",
+    "@types/react": "^16.0.38",
+    "@types/react-dom": "^16.0.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "jest": "^22.2.2",
-    "parcel-bundler": "^1.5.1",
-    "parcel-plugin-typescript": "^0.5.3",
+    "jest": "^22.3.0",
+    "parcel-bundler": "^1.6.1",
+    "parcel-plugin-typescript": "^0.6.0",
     "prettier": "^1.10.2",
     "react-test-renderer": "^16.2.0",
-    "ts-jest": "^22.0.3",
+    "ts-jest": "^22.0.4",
     "tslint": "^5.9.1",
     "tslint-config-airbnb": "^5.6.0",
-    "tslint-config-prettier": "^1.7.0",
-    "tslint-react": "^3.4.0",
-    "typescript": "^2.7.1"
+    "tslint-config-prettier": "^1.8.0",
+    "tslint-react": "^3.5.1",
+    "typescript": "^2.7.2"
   }
 }

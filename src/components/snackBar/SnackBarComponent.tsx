@@ -28,7 +28,7 @@ export class SnackBarComponent extends React.Component<{}, SnackBarComponentStat
 
     componentDidMount()
     {
-        this._snack.IsOpen.subscribe((isOpen) => 
+        this.snackSubscription = this._snack.IsOpen.subscribe((isOpen) => 
         {
             this.setState({ visible: isOpen });
         });

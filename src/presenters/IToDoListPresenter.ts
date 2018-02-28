@@ -1,9 +1,10 @@
-import { ToDoTask } from './../models/ToDoTask';
 import * as Rx from 'rxjs';
+import { Task } from '../models/Task';
 
-export interface IToDoListPresenter
+export interface ITasksListPresenter
 {
     Filter$: Rx.BehaviorSubject<string>;
-    Items$: Rx.BehaviorSubject<ToDoTask[]>;
+    Items$: Rx.BehaviorSubject<Task[]>;
+    Items: Task[];
     SetFilter(text: string): void;
 }

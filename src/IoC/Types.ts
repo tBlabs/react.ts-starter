@@ -1,8 +1,9 @@
 export const Types =
     {
-        ISampleService: Symbol("ISampleService"),
-        IToDoListService: Symbol("IToDoListService"),
-        IToDoListPresenter: Symbol("IToDoListPresenter"),
         ISnackBar: Symbol("ISnackBar"),
-        ILocation: Symbol("ILocation")
+        ILocation: Symbol("ILocation"),
+        ISampleService: Symbol("ISampleService"),
+        ITasksListService: Symbol("ITasksListService"),
+        ITasksListPresenter: Symbol("ITasksListPresenter"),
+        ITestComponentParams: Symbol("ITestComponentParams")
     };

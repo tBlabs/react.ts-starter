@@ -1,6 +1,6 @@
-import { guid } from './../types/guid';
+import { guid } from '../types/guid';
 
-export class ToDoTask
+export class Task
 {
     id: number;
     text: string;

@@ -1,40 +1,40 @@
-import { ToDoTask } from './../../models/ToDoTask';
-import { guid } from './../../types/guid';
+import { Task } from './../../models/Task';
+import { guid } from '../../types/guid';
 import { injectable } from "inversify";
 import 'reflect-metadata';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { IToDoListService } from "./IToDoListService";
+import { ITasksListService } from './ITasksListService';
 
 @injectable()
-export class ToDoListService implements IToDoListService
+export class TasksListService implements ITasksListService
 {
-    public items$: BehaviorSubject<ToDoTask[]> = new BehaviorSubject([new ToDoTask('sample task #1', true), new ToDoTask('sample task #2')]);
+    public items$: BehaviorSubject<Task[]> = new BehaviorSubject([new Task('sample task #1', true), new Task('sample task #2')]);
 
-    public get Items(): ToDoTask[]
+    public get Items(): Task[]
     {
         return this.items$.value;
     }
 
-    public get Items$(): BehaviorSubject<ToDoTask[]>
+    public get Items$(): BehaviorSubject<Task[]>
     {
         return this.items$;
     }
 
-    public async AddExisting(task: ToDoTask): Promise<void>
+    public async AddExisting(task: Task): Promise<void>
     {
         this.items$.next([...this.Items, task]);
     }
 
     public async Add(itemName: string): Promise<void>
     {
-        const task: ToDoTask = new ToDoTask(itemName);
+        const task: Task = new Task(itemName);
 
         this.AddExisting(task);
     }
 
-    private FindByIdOrThrow(id: number): ToDoTask
+    private FindByIdOrThrow(id: number): Task
     {
-        const task: ToDoTask | undefined = this.Items.find((i: ToDoTask) => i.id === id);
+        const task: Task | undefined = this.Items.find((i: Task) => i.id === id);
 
         if (task === undefined) 
         {
@@ -55,7 +55,8 @@ export class ToDoListService implements IToDoListService
 
     public async Delete(id: number): Promise<void>
     {
-        const taskIndex: number = this.Items.findIndex((i: ToDoTask) => i.id === id);
+        const taskIndex: number = this.Items.findIndex((i: Task) => i.id === id);
+
         if (taskIndex === (-1))
         {
             throw new Error('Not found');
