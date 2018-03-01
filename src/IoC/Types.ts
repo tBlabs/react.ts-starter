@@ -9,6 +9,6 @@ export const Types =
         ITasksListPresenter: Symbol("ITasksListPresenter"),
         ITestComponentParams: Symbol("ITestComponentParams"),
         ITasksListPresenterToLocatorBinder: Symbol("ITasksListPresenterToLocatorBinder"),
-        BrowserHistory: Symbol("BrowserHistory"),
-        IWindowTitle: Symbol("IWindowTitle")
+        IWindowTitle: Symbol("IWindowTitle"),
+        IBrowserWindow: Symbol("IBrowserWindow")
     };

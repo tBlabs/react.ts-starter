@@ -34,9 +34,9 @@ export class TasksListContainerComponent extends React.Component<{}, {}>
     {
         return (
             <div>
+                <TasksListStats />
                 <TaskAdderComponent />
                 <TasksListComponent />
-                <TasksListStats />
             </div>
         );
     }

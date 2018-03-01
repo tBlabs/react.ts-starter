@@ -20,17 +20,24 @@ export class TaskComponent extends React.Component<TaskComponentProps, {}>
 
     private async DeleteButton_Clicked(): Promise<void>
     {
-        const thisTaskCopy = this.props.task;
-        await this._tasksList.Delete(this.props.task.id);
+        try
+        {
+            const thisTaskCopy = this.props.task;
+            await this._tasksList.Delete(this.props.task.id);
 
-        this._snack.Info('Task deleted', "UNDO", async () => { await this._tasksList.AddExisting(thisTaskCopy as Task) });
+            this._snack.Info('Task deleted', "UNDO", async () => { await this._tasksList.AddExisting(thisTaskCopy as Task) });
+        }
+        catch (ex)
+        {
+            console.log('Task delete ex:', ex);
+        }
     }
 
     render()
     {
         const controlStyle = { display: "inline-block", width: "200px" };
 
-        return (
+        if (0) return (
             <div>
                 <TextField
                     name="toDoText"
@@ -51,6 +58,11 @@ export class TaskComponent extends React.Component<TaskComponentProps, {}>
                 >
                     <ActionDelete />
                 </IconButton>
+            </div>
+        );
+        return (
+            <div>
+                aaaaaaaaaaaaaaaaaaaaaaaaa
             </div>
         );
     }

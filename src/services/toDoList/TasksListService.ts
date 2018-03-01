@@ -32,7 +32,7 @@ export class TasksListService implements ITasksListService
         this.AddExisting(task);
     }
 
-    private FindByIdOrThrow(id: number): Task
+    private FindByIdOrThrow(id: guid): Task
     {
         const task: Task | undefined = this.Items.find((i: Task) => i.id === id);
 
@@ -44,7 +44,7 @@ export class TasksListService implements ITasksListService
         return task;
     }
 
-    public async Toggle(id: number): Promise<void>
+    public async Toggle(id: guid): Promise<void>
     {
         const task = this.FindByIdOrThrow(id);
 
@@ -53,13 +53,13 @@ export class TasksListService implements ITasksListService
         this.items$.next(this.Items);
     }
 
-    public async Delete(id: number): Promise<void>
+    public async Delete(id: guid): Promise<void>
     {
         const taskIndex: number = this.Items.findIndex((i: Task) => i.id === id);
 
         if (taskIndex === (-1))
         {
-            throw new Error('Not found');
+            throw new Error(`Task ${ id } not found`);
         }
 
         this.Items.splice(taskIndex, 1);
@@ -67,7 +67,7 @@ export class TasksListService implements ITasksListService
         this.items$.next(this.Items);
     }
 
-    public async SetText(id: number, newName: string): Promise<void>
+    public async SetText(id: guid, newName: string): Promise<void>
     {
         const task = this.FindByIdOrThrow(id);
 

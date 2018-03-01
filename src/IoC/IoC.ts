@@ -1,3 +1,5 @@
+import { BrowserWindow } from './../services/browserWindow/BrowserWindow';
+import { IBrowserWindow } from './../services/browserWindow/IBrowserWindow';
 import { Container } from "inversify";
 import { Types } from './Types';
 import "reflect-metadata";
@@ -30,7 +32,7 @@ IoC.bind<ISnackBar>(Types.ISnackBar).to(SnackBarService).inSingletonScope();
 IoC.bind<ILocator>(Types.ILocator).to(Locator).inSingletonScope();
 IoC.bind<ITestComponentParams>(Types.ITestComponentParams).to(TestComponentParamsExtractor).inSingletonScope();
 IoC.bind<ILocatorParams<SampleComponentLocatorParams>>(Types.ILocatorParams).to(LocatorParams).inSingletonScope();
-IoC.bind(Types.BrowserHistory).toConstantValue(history);
+IoC.bind(Types.IBrowserWindow).to(BrowserWindow);
 IoC.bind(Types.IWindowTitle).to(WindowTitle);
 
 const LazyInject = getDecorators(IoC).lazyInject;

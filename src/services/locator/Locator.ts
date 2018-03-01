@@ -1,3 +1,4 @@
+import { IBrowserWindow } from './../browserWindow/IBrowserWindow';
 import { LocationData } from './../../router/LocationData';
 import { Location } from './../../router/Location';
 import { IWindowTitle } from './../title/IWindowTitle';
@@ -9,46 +10,32 @@ import { ILocator } from './ILocator';
 import { Types } from '../../IoC/Types';
 import { IHistory } from '../../router/IHistory';
 
-// export class BrowserWindow
-// {
-//     public get CurrentUrl(): string
-//     {
-//         return window.location.pathname;
-//     }
-
-//     public HistoryBackButtonPressed(callback: () => void)
-//     {
-//         if (callback)
-//         {
-
-//         }
-//     }
-// }
-
 @injectable()
 export class Locator implements ILocator
 {
     public Location$: BehaviorSubject<LocationData> = new BehaviorSubject<LocationData>(new LocationData(Location.Home));
 
-    constructor(
-        // @inject(Types.IBrowserWindow) private _window: IBrowserWindow,
-        @inject(Types.BrowserHistory) private _history: IHistory,
-        @inject(Types.IWindowTitle) private _title: IWindowTitle)
+    public get Location(): LocationData
     {
-        const url = window.location.pathname;
+        return this.Location$.value;
+    }
 
+    constructor( @inject(Types.IBrowserWindow) private _window: IBrowserWindow)
+    {
+        this.ParseLocationAndSubmit(_window.CurrentUrl);
+
+        _window.HistoryBackButtonPressed(() =>
+        {
+            this.ParseLocationAndSubmit(_window.CurrentUrl);
+            // console.log('Back button jump to: ' + JSON.stringify(locationData));
+        });
+    }
+
+    private ParseLocationAndSubmit(url: string): void
+    {
         const locationData: LocationData = this.ParseLocation(url);
 
         this.Location$.next(locationData);
-
-        window.addEventListener('popstate', (e: PopStateEvent) =>
-        {
-            const url = window.location.pathname;
-
-            const locationData: LocationData = this.ParseLocation(url);
-            console.log('Back button jump to: ' + JSON.stringify(locationData));
-            this.Location$.next(locationData);
-        });
     }
 
     public ParseLocation(url: string): LocationData
@@ -113,24 +100,26 @@ export class Locator implements ILocator
     {
         const locationData = new LocationData(location, params);
         const url = this.BuildUrl(locationData);
-        this._title.Set(location);
-        this._history.pushState(null, url, url);
+
+        this._window.Title = location;
+        this._window.HistoryPush(url);
+
         console.log('Manual jump to: ' + JSON.stringify(locationData));
         this.Location$.next(locationData);
     }
 
     public ReplaceUrlParams(params: object): void
     {
-        const locationData = new LocationData(this.Location$.value.location, params);
+        const locationData = new LocationData(this.Location.location, params);
         const url = this.BuildUrl(locationData);
 
-        history.replaceState(null, url, url);
+        this._window.UrlReplace(url);
 
         this.Location$.next(locationData);
     }
 
     public Is(location: Location): boolean
     {
-        return this.Location$.value.location === location;
+        return this.Location.location === location;
     }
 } 

@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { Task } from "../../models/Task";
+import { guid } from '../../types/guid';
 
 export interface ITasksListService
 {
@@ -7,7 +8,7 @@ export interface ITasksListService
     Items: Task[];
     Add(taskText: string): Promise<void>;
     AddExisting(task: Task): Promise<void>;
-    Toggle(id: number): Promise<void>;
-    Delete(id: number): Promise<void>;
-    SetText(id: number, newName: string): Promise<void>;
+    Toggle(id: guid): Promise<void>;
+    Delete(id: guid): Promise<void>;
+    SetText(id: guid, newName: string): Promise<void>;
 }

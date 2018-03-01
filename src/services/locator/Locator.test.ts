@@ -1,6 +1,8 @@
-import { IWindowTitle } from './../title/IWindowTitle';
-import { Locator, LocationData, Locations, IHistory } from './Locator';
+import { Location } from './../../router/Location';
+import { Locator } from './Locator';
 import base64url from 'base64url';
+import { LocationData } from '../../router/LocationData';
+import { BrowserWindow } from '../browserWindow/BrowserWindow';
 
 describe(Locator.name, () =>
 {
@@ -8,16 +10,15 @@ describe(Locator.name, () =>
 
     beforeEach(() =>
     {
-        const history: IHistory = { pushState(a, b, c) { } };
-        const title: IWindowTitle = { Set(t) { } };
-        locator = new Locator(history, title);
+        const window = new BrowserWindow();
+        locator = new Locator(window);
     });
 
     it('should return Home location for empty input', () =>
     {
         const result: LocationData = locator.ParseLocation('');
 
-        expect(result.location).toBe(Locations.Home);
+        expect(result.location).toBe(Location.Home);
         expect(result.params).toBeUndefined();
     });
 
@@ -25,7 +26,7 @@ describe(Locator.name, () =>
     {
         const result: LocationData = locator.ParseLocation('/');
 
-        expect(result.location).toBe(Locations.Home);
+        expect(result.location).toBe(Location.Home);
         expect(result.params).toBeUndefined();
     });
 
@@ -72,9 +73,9 @@ describe(Locator.name, () =>
 
     it('Is() works', () =>
     {
-        locator.GoTo(Locations.Home);
+        locator.GoTo(Location.Home);
 
-        const result: boolean = locator.Is(Locations.Home);
+        const result: boolean = locator.Is(Location.Home);
 
         expect(result).toBeTruthy();
     });

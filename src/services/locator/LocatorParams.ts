@@ -17,6 +17,6 @@ export class LocatorParams<T extends object> implements ILocatorParams<T>
 
     public UpdateParam(key: keyof T, value: any)
     {
-        this._locator.ReplaceUrlParams({ ...this._locator.Location$.value.params, [key]: value });
+        this._locator.ReplaceUrlParams({ ...this._locator.Location.params, [key]: value });
     }
 }

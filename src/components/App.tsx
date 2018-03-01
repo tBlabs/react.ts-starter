@@ -31,8 +31,6 @@ export class App extends React.Component<{}, {}>
 
     this.locatorSubscription = this._locator.Location$.subscribe((loc) =>
     {
-      console.log('app.mount loc:', loc);
-
       this.forceUpdate();
     });
   }
@@ -42,48 +40,12 @@ export class App extends React.Component<{}, {}>
     this.locatorSubscription.unsubscribe();
   }
 
-  // render()
-  // {
-  //   return (
-  //     <MuiThemeProvider>
-  //       <div>
-  //         window.location: { this._location.Url$.value }
-  //         <hr />
-  //         <RaisedButton
-  //           onClick={ () => this._location.JumpTo('/home') }
-  //           label="Home"
-  //         />
-  //         <RaisedButton
-  //           onClick={ () => this._location.JumpTo('/a/b/c') }
-  //           label="a/b/c"
-  //         />
-  //         <RaisedButton
-  //           onClick={ () => this._location.JumpTo('/url/with/params/foo/14/true') }
-  //           label="/foo/.."
-  //         />
-  //         <RaisedButton
-  //           onClick={ () => this._location.JumpTo('/url/with/params/bar/2414/false') }
-  //           label="bar.."
-  //         />
-  //         <JumpComponent label="home/43" jumpTo="/home/43" />
-  //         <JumpComponent label="todo" jumpTo="/todo" />
-  //         <JumpComponent label="123" jumpTo="/123" />
-  //         { this._location.UrlBeginsWith('/url/with/params') && <div><TestComponent /></div> }
-  //         { this._location.UrlIs('/home/me') && <p>only if /home/me</p> }
-  //         {/* { this._location.Is(Location.SampleLocation) && <p>Sample Location</p> } */ }
-  //         <hr />
-  //         { this._location.UrlIs('/todo') && <TasksListContainerComponent /> }
-  //         <SnackBarComponent />
-  //       </div>
-  //     </MuiThemeProvider>
-  //   );
-  // }
   render()
   {
     return (
       <MuiThemeProvider>
         <div>
-          {/* location params: { JSON.stringify(this._locator.Location$.value.params) } */ }
+          location params: { JSON.stringify(this._locator.Location.params) }
           <hr />
           <JumpButton label="tasks list" location={ Location.Tasks } />
           <JumpButton label="s1" location={ Location.SamplePath1 } />

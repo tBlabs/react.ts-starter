@@ -5,6 +5,7 @@ import { Location } from '../../router/Location';
 export interface ILocator
 {
     Location$: BehaviorSubject<LocationData>;
+    Location: LocationData;
     GoTo(url: string, params?: any): void;
     ReplaceUrlParams(params: any): void;
     Is(location: Location): boolean;
