@@ -5,7 +5,7 @@ import { Types } from '../../IoC/Types';
 import { TextField } from 'material-ui';
 import { ITasksListService } from "../../services/toDoList/ITasksListService";
 import { Subscription } from 'rxjs/Subscription';
-import { ITasksListPresenter } from "../../presenters/IToDoListPresenter";
+import { ITasksListPresenter } from "../../presenters/ITasksListPresenter";
 import { Task } from "../../models/Task";
 import { TaskComponent } from './TaskComponent';
 
@@ -13,16 +13,17 @@ export class TasksListComponent extends React.Component<{}, {}>
 {
     @LazyInject(Types.ITasksListPresenter) private _tasksListPresenter: ITasksListPresenter;
 
-    private tasksListSubscription: Subscription;
+    private tasksListPresenterSubscription: Subscription;
 
     componentDidMount()
     {
-        this.tasksListSubscription = this._tasksListPresenter.Items$.subscribe((items: Task[]) => this.forceUpdate());
+        this.tasksListPresenterSubscription = this._tasksListPresenter.Items$.subscribe((items: Task[]) => this.forceUpdate());
     }
 
     componentWillUnmount()
     {
-        this.tasksListSubscription.unsubscribe();
+        this.tasksListPresenterSubscription.unsubscribe();
+        this._tasksListPresenter.Dispose();
     }
 
     render()

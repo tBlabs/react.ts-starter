@@ -7,4 +7,5 @@ export interface ITasksListPresenter
     Items$: Rx.BehaviorSubject<Task[]>;
     Items: Task[];
     SetFilter(text: string): void;
+    Dispose(): void;
 }

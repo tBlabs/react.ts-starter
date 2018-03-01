@@ -5,16 +5,13 @@ import { Types } from '../../IoC/Types';
 import { TextField } from 'material-ui';
 import { ITasksListService } from "../../services/toDoList/ITasksListService";
 import { Subscription } from 'rxjs/Subscription';
-import { ITasksListPresenter } from "../../presenters/IToDoListPresenter";
+import { ITasksListPresenter } from "../../presenters/ITasksListPresenter";
 import { Task } from "../../models/Task";
 
 export class TasksListStats extends React.Component<{}, {}>
 {
-    @LazyInject(Types.ITasksListPresenter)
-    private _listPresenter: ITasksListPresenter;
-
-    @LazyInject(Types.ITasksListService)
-    private _listService: ITasksListService;
+    @LazyInject(Types.ITasksListPresenter) private _listPresenter: ITasksListPresenter;
+    @LazyInject(Types.ITasksListService) private _listService: ITasksListService;
 
     private tasksListServiceSubscription: Subscription;
     private tasksListPresenterSubscription: Subscription;

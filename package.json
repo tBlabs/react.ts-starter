@@ -24,7 +24,7 @@
       "^.+\\.(ts|tsx)$": "<rootDir>/config/test-preprocessor.js"
     },
     "testMatch": [
-      "**/(_tests|_proofs)/*.(test|spec).(ts|tsx|js)"
+      "**/*.(test|spec).(ts|tsx|js)"
     ]
   },
   "keywords": [
@@ -36,6 +36,8 @@
   "license": "beerware",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "base64-url": "^2.2.0",
+    "base64url": "^2.0.0",
     "inversify": "^4.10.0",
     "inversify-inject-decorators": "^3.1.0",
     "material-ui": "^0.20.0",
@@ -45,6 +47,7 @@
     "rxjs": "^5.5.6"
   },
   "devDependencies": {
+    "@types/base64url": "^2.0.0",
     "@types/enzyme": "^3.1.9",
     "@types/inversify-inject-decorators": "^2.0.0",
     "@types/jasmine": "^2.8.6",

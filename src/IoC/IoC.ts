@@ -3,27 +3,35 @@ import { Types } from './Types';
 import "reflect-metadata";
 import getDecorators from "inversify-inject-decorators";
 
+import { WindowTitle } from './../services/title/WindowTitle';
+import { IWindowTitle } from './../services/title/IWindowTitle';
+import { ILocator } from './../services/locator/ILocator';
 import { TestComponentParamsExtractor } from './../extractors/testComponent/TestComponentParamsExtractor';
-import { ILocation } from './../services/location/ILocation';
 import { SnackBarService } from './../services/snackBar/SnackBarService';
 import { ISnackBar } from './../services/snackBar/ISnackBar';
-import { ToDoListPresenter } from './../presenters/ToDoListPresenter';
-import { ITasksListPresenter } from './../presenters/IToDoListPresenter';
+import { ITasksListPresenter } from './../presenters/ITasksListPresenter';
 import { ISampleService } from './../services/_samples/ISampleService';
 import { SampleService } from './../services/_samples/SampleService';
-import { Location } from '../services/location/Location';
 import { ITestComponentParams } from '../extractors/testComponent/ITestComponentParams';
 import { ITasksListService } from '../services/toDoList/ITasksListService';
 import { TasksListService } from '../services/toDoList/TasksListService';
+import { Locator } from "../services/locator/Locator";
+import { SampleComponentLocatorParams } from '../components/_samples/SampleComponent';
+import { TasksListPresenter } from '../presenters/TasksListPresenter';
+import { ILocatorParams } from "../services/locator/ILocatorParams";
+import { LocatorParams } from "../services/locator/LocatorParams";
 
 const IoC = new Container();
 
 IoC.bind<ISampleService>(Types.ISampleService).to(SampleService);
-IoC.bind<ITasksListPresenter>(Types.ITasksListPresenter).to(ToDoListPresenter).inSingletonScope();
+IoC.bind<ITasksListPresenter>(Types.ITasksListPresenter).to(TasksListPresenter).inSingletonScope();
 IoC.bind<ITasksListService>(Types.ITasksListService).to(TasksListService).inSingletonScope();
 IoC.bind<ISnackBar>(Types.ISnackBar).to(SnackBarService).inSingletonScope();
-IoC.bind<ILocation>(Types.ILocation).to(Location).inSingletonScope();
+IoC.bind<ILocator>(Types.ILocator).to(Locator).inSingletonScope();
 IoC.bind<ITestComponentParams>(Types.ITestComponentParams).to(TestComponentParamsExtractor).inSingletonScope();
+IoC.bind<ILocatorParams<SampleComponentLocatorParams>>(Types.ILocatorParams).to(LocatorParams).inSingletonScope();
+IoC.bind(Types.BrowserHistory).toConstantValue(history);
+IoC.bind(Types.IWindowTitle).to(WindowTitle);
 
 const LazyInject = getDecorators(IoC).lazyInject;
 

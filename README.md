@@ -4,42 +4,48 @@
 
 enum Location
 {
-    SampleLocation1,
-    SampleLocation2,
-    SampleLocation3
+    Route1,
+    Route2,
+    ...
 }
 
 ## Jump to location
 
-_router.JumpTo(Location.SampleLocation)
+locator.GoTo(Location.Route1)
+locator.GoTo(Location.Route1, { foo: "bar" })
 
 ## Is in location
 
-_router.Is(Location.SampleLocation)
+locator.Is(Location.Route1)
 
-## Router params for component
+## Get params from url in component
 
-interface SampleComponentRouterParams
+Make params class:
+
+class SampleComponentLocatorParams
 {
     foo: string;
     bar: number;
 }
 
-## Get params from location in component
+Inject `LocatorParams<T>`, get params by:
 
-@Inject(..) _locatorParams: IComponentLocatorParams<SampleComponentParams>;
+_params.Params$.value.foo
 
-_locatorParams.subscribe
+Don't forget to subscribe to `_params.Params$`.
 
-## Set params in location
+## Set param in url from component
 
-_locator.Set()
+_locator.SetParam('foo', 'new value')
+
+# Todo
+
+- Bind Location with window title
+- Load params to url at location entry
 
 
 
-
-
-# Typescript + React + Parcel = ❤️ 
+# Typescript + React + Parcel + IoC + Rx = ❤️ 
 
 This repository has basic settings for buildling react application in Typescript.
 
@@ -53,17 +59,9 @@ The original source code of the provided example is [here](https://github.com/ke
 - Test configuration using Jest + Enzyme
 - Parcel bundler
 
-## How to set up the project
-
-```
-git clone git@github.com:emaren84/ts-react-parcel.git
-cd ts-react-parcel
-npm install
-```
-
 ## How to start development for the application
 
-    npm run develop
+    npm run serve
 
 Execute the command and you can run & test the application on `localhost:1234` in the browser.
 
@@ -71,22 +69,4 @@ Execute the command and you can run & test the application on `localhost:1234` i
 
     npm run build
 
-The default output directory is `/dist`. You can change the destination wherever you want.
-
-```
-// package.json
-// ...
-"scripts": {
-  // ...
-  "build": "parcel build ./src/index.html -d YOUR_OUTPUT_DIR --public-url '/'" <- Change here
-}
-// ...
-```
-
-## How to test the application
-
-    npm run test        # run test once
-    npm run test:watch  # watch mode
-
-You have to create `__tests__` directory at the same location of files which you want to test.
-Test file's name should be `SOURCE.test.ts/tsx/js` or `SOURCE.spec.ts/tsx/js`.
+The default output directory is `/dist`.

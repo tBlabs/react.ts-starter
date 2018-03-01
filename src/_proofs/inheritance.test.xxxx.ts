@@ -21,7 +21,7 @@ class B extends A
 
     public Method()
     {
-        console.log('B');
+        // console.log('B');
         return 'B'
     }
 }
