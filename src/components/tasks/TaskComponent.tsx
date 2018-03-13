@@ -37,7 +37,7 @@ export class TaskComponent extends React.Component<TaskComponentProps, {}>
     {
         const controlStyle = { display: "inline-block", width: "200px" };
 
-        if (0) return (
+        return (
             <div>
                 <TextField
                     name="toDoText"
@@ -58,11 +58,6 @@ export class TaskComponent extends React.Component<TaskComponentProps, {}>
                 >
                     <ActionDelete />
                 </IconButton>
-            </div>
-        );
-        return (
-            <div>
-                aaaaaaaaaaaaaaaaaaaaaaaaa
             </div>
         );
     }

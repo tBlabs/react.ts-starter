@@ -8,7 +8,6 @@ import 'reflect-metadata';
 import base64url from 'base64url';
 import { ILocator } from './ILocator';
 import { Types } from '../../IoC/Types';
-import { IHistory } from '../../router/IHistory';
 
 @injectable()
 export class Locator implements ILocator

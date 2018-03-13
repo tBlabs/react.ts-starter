@@ -6,51 +6,97 @@ import { TasksListService } from '../services/toDoList/TasksListService';
 import { TasksListComponent } from './tasks/TasksListComponent';
 import { TaskAdderComponent } from './tasks/TaskAdderComponent';
 import { SnackBarComponent } from './snackBar/SnackBarComponent';
-import { RaisedButton } from 'material-ui';
+import { RaisedButton, FlatButton } from 'material-ui';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { TextField } from 'material-ui';
 import { Subscription } from 'rxjs';
 import { ISnackBar } from '../services/snackBar/ISnackBar';
-import { Location } from '../services/location/Location';
-import { ILocation } from '../services/location/ILocation';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { inject } from 'inversify';
 import { ITestComponentParams } from '../extractors/testComponent/ITestComponentParams';
+import { Dialog } from 'material-ui';
 
 export class TestComponent extends React.Component<{}, {}>
 {
-    @LazyInject(Types.ITestComponentParams) private _routerParams: ITestComponentParams;
+    // @LazyInject(Types.ITestComponentParams) private _routerParams: ITestComponentParams;
 
-    private routerParamsSubscription: Subscription;
+    // private routerParamsSubscription: Subscription;
+    constructor()
+    {
+        super({});
+
+        this.state = { dialog: true, dialog2: true };
+    }
 
     componentDidMount()
     {
-        this.routerParamsSubscription = this._routerParams.Params$.subscribe(() => this.forceUpdate());
+        // this.routerParamsSubscription = this._routerParams.Params$.subscribe(() => this.forceUpdate());
     }
 
     componentWillUnmount()
     {
-        this.routerParamsSubscription.unsubscribe();
+        // this.routerParamsSubscription.unsubscribe();
     }
 
     private Button_Clicked()
     {
+        this.setState({ dialog: false });
         // console.log('click');
-        let obj = { ...this._routerParams.Params$.value, num: this._routerParams.Params$.value.num += 1 };
+        // let obj = { ...this._routerParams.Params$.value, num: this._routerParams.Params$.value.num += 1 };
         // console.log(obj);
-        this._routerParams.Params$.next(obj);
+        // this._routerParams.Params$.next(obj);
 
         // this._routerParams.NumericParam = 5;
     }
 
     render()
     {
+        const closeButton = <RaisedButton label="Close" onClick={ () => this.setState({ dialog: false }) } />
+
         return (
             <div>
-                TestComponent: params.str={ this._routerParams.Params$.value.str }
-                TestComponent: params.num={ this._routerParams.Params$.value.num.toString() }
+                {/* TestComponent: params.str={ this._routerParams.Params$.value.str } */ }
+                {/* TestComponent: params.num={ this._routerParams.Params$.value.num.toString() } */ }
                 <RaisedButton label="url.num++"
                     onClick={ () => this.Button_Clicked() } />
+                <RaisedButton label="dialog"
+                    onClick={ () => { this.setState({ dialog: true }) } } />
+                <Dialog
+                    actions={ [] }
+                    title="Login" open={ this.state.dialog } modal={ true }>
+                    <TextField
+                        name="newTaskText"
+                        hintText="@"
+                        defaultValue=""
+                        ref={ (input: TextField) => { } }
+                    />
+                    <br />
+                    <TextField
+                        name="newTaskText"
+                        hintText="Password"
+                        defaultValue=""
+                        ref={ (input: TextField) => { } }
+                    />
+                    <br />
+                    <RaisedButton label="Login"
+                        primary={ true }
+                        onClick={ () => this.Button_Clicked() } />
+                    <FlatButton label="Remind password"
+                        onClick={ () => { } } />
+                    <Dialog
+                        actions={ [] }
+                        title="Login" open={ this.state.dialog2 } modal={ true }>
+                        <TextField
+                            name="newTaskText"
+                            hintText="@"
+                            defaultValue=""
+                            ref={ (input: TextField) => { } }
+                        />
+                        aaaaaaaaaaaaaaaaaaaaa
+                        <FlatButton label="Remind password"
+                            onClick={ () => { this.setState({ dialog2: false }) } } />
+                    </Dialog>
+                </Dialog>
             </div>
         );
     }
