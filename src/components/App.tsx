@@ -4,7 +4,7 @@ import * as React from 'react';
 import { LazyInject } from './../IoC/IoC';
 import { TasksListService } from '../services/toDoList/TasksListService';
 import { SnackBarComponent } from './snackBar/SnackBarComponent';
-import { RaisedButton, AppBar, Drawer, MenuItem } from 'material-ui';
+import { RaisedButton, AppBar, Drawer, MenuItem, Paper, Menu, Divider } from 'material-ui';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { TextField } from 'material-ui';
 import { Subscription } from 'rxjs';
@@ -17,11 +17,12 @@ import { ILocator } from '../services/locator/ILocator';
 import { Sample1Component } from './_samples/SampleComponent';
 import { Location } from './../router/Location';
 import { Typography } from 'material-ui/styles/typography';
+import { DevicesListComponent } from './DevicesListComponent';
+import { AddDeviceComponent } from './AddDeviceComponent';
 
 export class App extends React.Component<{}, {}>
 {
   @LazyInject(Types.ISnackBar) private _snack: ISnackBar;
-  // @LazyInject(Types.ILocation) private _location: Location;
   @LazyInject(Types.ILocator) private _locator: ILocator;
 
   private locatorSubscription: Subscription;
@@ -45,43 +46,58 @@ export class App extends React.Component<{}, {}>
   {
     return (
       <MuiThemeProvider>
-        <div style={ { backgroundColor: 'red' } }>
+        <div>
           <AppBar
-            title="Title"
+            title="/logo/"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
           />
-          <Drawer open={ true }>
+          <Paper style={{
+            display: 'inline-block',
+            float: 'left',
+            margin: '16px 32px 16px 0',
+          }}>
+            <Menu>
+              <MenuItem primaryText="Urządzenia" />
+              <Divider />
+              <MenuItem primaryText="Użytkownicy" />
+            </Menu>
+          </Paper>
 
-
-            <MenuItem>Devices list</MenuItem>
-            <MenuItem>Users</MenuItem>
-          </Drawer>
-          location params: { JSON.stringify(this._locator.Location.params) }
-          <hr />
-          <JumpButton label="tasks list" location={ Location.Tasks } />
-          <JumpButton label="s1" location={ Location.SamplePath1 } />
-          <JumpButton label="s2" location={ Location.SamplePath2 } />
-          <hr />
-          { this._locator.Is(Location.SamplePath1) && <div>Sample Location #1</div> }
-          { this._locator.Is(Location.SamplePath2) && <div>Sample Location #2</div> }
-          <RaisedButton
-            onClick={ () => this._locator.GoTo(Location.SamplePath1) }
-            label="SampleLocation1"
-          />
-          <RaisedButton
-            onClick={ () => this._locator.GoTo(Location.SamplePath2, { foo: "bar" }) }
-            label="SampleLocation2 + foo=bar"
-          />
-          <RaisedButton
-            onClick={ () => this._locator.GoTo(Location.SamplePath2, { foo: "bazz" }) }
-            label="SampleLocation2 + foo=bazz"
-          />
-          { this._locator.Is(Location.SamplePath2) && <Sample1Component /> }
-          { this._locator.Is(Location.Tasks) && <TasksListContainerComponent /> }
-          <TestComponent />
+          <DevicesListComponent />
+          <AddDeviceComponent />
           <SnackBarComponent />
         </div>
       </MuiThemeProvider >
     );
   }
 }
+/*
+          <Drawer open={true}>
+            <MenuItem>Devices list</MenuItem>
+            <MenuItem>Users</MenuItem>
+          </Drawer>
+
+
+           location params: {JSON.stringify(this._locator.Location.params)}
+          <hr />
+          <JumpButton label="tasks list" location={Location.Tasks} />
+          <JumpButton label="s1" location={Location.SamplePath1} />
+          <JumpButton label="s2" location={Location.SamplePath2} />
+          <hr />
+          {this._locator.Is(Location.SamplePath1) && <div>Sample Location #1</div>}
+          {this._locator.Is(Location.SamplePath2) && <div>Sample Location #2</div>}
+          <RaisedButton
+            onClick={() => this._locator.GoTo(Location.SamplePath1)}
+            label="SampleLocation1"
+          />
+          <RaisedButton
+            onClick={() => this._locator.GoTo(Location.SamplePath2, { foo: "bar" })}
+            label="SampleLocation2 + foo=bar"
+          />
+          <RaisedButton
+            onClick={() => this._locator.GoTo(Location.SamplePath2, { foo: "bazz" })}
+            label="SampleLocation2 + foo=bazz"
+          />
+          {this._locator.Is(Location.SamplePath2) && <Sample1Component />}
+          {this._locator.Is(Location.Tasks) && <TasksListContainerComponent />}
+*/
