@@ -4,10 +4,7 @@ import * as React from 'react';
 import { LazyInject } from './../IoC/IoC';
 import { TasksListService } from '../services/toDoList/TasksListService';
 import { SnackBarComponent } from './snackBar/SnackBarComponent';
-import { RaisedButton, AppBar, Drawer, MenuItem, Paper, Menu, Divider } from 'material-ui';
-import { MuiThemeProvider } from 'material-ui/styles';
-import { TextField } from 'material-ui';
-import { Subscription } from 'rxjs';
+// import { Subscription } from 'rxjs';
 import { ISnackBar } from '../services/snackBar/ISnackBar';
 import { TestComponent } from './TestComponent';
 import { TasksListContainerComponent } from './tasks/TasksListContainerComponent';
@@ -16,22 +13,30 @@ import { JumpButton } from './jump/JumpButton';
 import { ILocator } from '../services/locator/ILocator';
 import { Sample1Component } from './_samples/SampleComponent';
 import { Location } from './../router/Location';
-import { Typography } from 'material-ui/styles/typography';
 import { DevicesListComponent } from './DevicesListComponent';
 import { AddDeviceComponent } from './AddDeviceComponent';
+import { LocationData } from '../router/LocationData';
+import Button from 'material-ui/Button';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
+
 
 export class App extends React.Component<{}, {}>
 {
   @LazyInject(Types.ISnackBar) private _snack: ISnackBar;
   @LazyInject(Types.ILocator) private _locator: ILocator;
 
-  private locatorSubscription: Subscription;
+  // private locatorSubscription: Subscription;
 
   componentDidMount()
   {
     this._snack.Info('Hello!');
 
-    this.locatorSubscription = this._locator.Location$.subscribe((loc) =>
+    // this.locatorSubscription = 
+    this._locator.Location$.subscribe((loc: LocationData) =>
     {
       this.forceUpdate();
     });
@@ -39,35 +44,41 @@ export class App extends React.Component<{}, {}>
 
   componentWillUnmount()
   {
-    this.locatorSubscription.unsubscribe();
+    // this.locatorSubscription.unsubscribe(  );
   }
 
   render()
   {
     return (
-      <MuiThemeProvider>
-        <div>
-          <AppBar
-            title="/logo/"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-          />
-          <Paper style={{
-            display: 'inline-block',
-            float: 'left',
-            margin: '16px 32px 16px 0',
-          }}>
-            <Menu>
-              <MenuItem primaryText="Urządzenia" />
-              <Divider />
-              <MenuItem primaryText="Użytkownicy" />
-            </Menu>
-          </Paper>
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography style={ { flex: 1 } } variant="title" color="inherit">
+              Title
+          </Typography>
+            <Button color="inherit">Login</Button>
+          </Toolbar>
+        </AppBar>
+        <Button variant="raised" color="primary">
+          Hello World
+        </Button>
 
-          <DevicesListComponent />
-          <AddDeviceComponent />
-          <SnackBarComponent />
-        </div>
-      </MuiThemeProvider >
+        {/* <AppBar
+          title="/logo/"
+        />
+        <Paper style={ {
+          display: 'inline-block',
+          float: 'left',
+          margin: '16px 32px 16px 0',
+        } }>
+        </Paper>
+        <DevicesListComponent />
+        <AddDeviceComponent />
+        <SnackBarComponent /> */}
+      </div>
     );
   }
 }

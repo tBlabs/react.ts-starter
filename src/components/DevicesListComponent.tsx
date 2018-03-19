@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { TextField } from 'material-ui';
-
 import { RaisedButton, FlatButton, TableHeader, Table, TableHeaderColumn, TableRow, TableBody, TableRowColumn, FloatingActionButton } from 'material-ui';
 import { ContentAdd } from 'material-ui/svg-icons';
+// import { Typography } from 'material-ui';
 
 export class DevicesListComponent extends React.Component<{}, {}>
 {
@@ -10,20 +10,20 @@ export class DevicesListComponent extends React.Component<{}, {}>
     {
         return (
 
-            <div style={{ float: 'left', width: '80%' }}>
-                <h2>
+            <div style={ { float: 'left', width: '80%' } }>
+                {/* <Typography component="p">
                     Lista urządzeń
-                </h2>
+                </Typography> */}
                 <TextField
                     name="newTaskText"
                     hintText="Szukaj"
                     defaultValue=""
-                    ref={(input: TextField) => { }}
+                    ref={ (input: TextField) => { } }
                 />
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHeaderColumn>Nazwa</TableHeaderColumn>
+                            <TableHeaderColumn>Nazzzzwa</TableHeaderColumn>
                             <TableHeaderColumn>Lokalizacja</TableHeaderColumn>
                             <TableHeaderColumn>Klient</TableHeaderColumn>
                             <TableHeaderColumn>Typ współpracy</TableHeaderColumn>
@@ -39,7 +39,7 @@ export class DevicesListComponent extends React.Component<{}, {}>
                             <TableRowColumn>stała</TableRowColumn>
                             <TableRowColumn>3.05.2019</TableRowColumn>
                             <TableRowColumn>
-                                <FlatButton label="Edytuj" primary={true} /></TableRowColumn>
+                                <FlatButton label="Edytuj" primary={ true } /></TableRowColumn>
                         </TableRow>
                         <TableRow>
                             <TableRowColumn>ABC123</TableRowColumn>
@@ -48,7 +48,7 @@ export class DevicesListComponent extends React.Component<{}, {}>
                             <TableRowColumn>stała</TableRowColumn>
                             <TableRowColumn>3.05.2019</TableRowColumn>
                             <TableRowColumn>
-                                <FlatButton label="Edytuj" primary={true} /></TableRowColumn>
+                                <FlatButton label="Edytuj" primary={ true } /></TableRowColumn>
                         </TableRow>
                         <TableRow>
                             <TableRowColumn>ABC123</TableRowColumn>
@@ -57,12 +57,12 @@ export class DevicesListComponent extends React.Component<{}, {}>
                             <TableRowColumn>stała</TableRowColumn>
                             <TableRowColumn>3.05.2019</TableRowColumn>
                             <TableRowColumn>
-                                <FlatButton label="Edytuj" primary={true} />
-                                <FlatButton label="Usuń" primary={true} /></TableRowColumn>
+                                <FlatButton label="Edytuj" primary={ true } />
+                                <FlatButton label="Usuń" primary={ true } /></TableRowColumn>
                         </TableRow>
                     </TableBody>
                 </Table>
-                <FloatingActionButton mini={true}>
+                <FloatingActionButton mini={ true }>
                     <ContentAdd />
                 </FloatingActionButton>
             </div>

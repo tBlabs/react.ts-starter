@@ -6,6 +6,7 @@
     "module": "commonjs",
     "strict": true,
     "jsx": "react",
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "strictFunctionTypes": false
   }
 }
