@@ -13,7 +13,7 @@ import { JumpButton } from './jump/JumpButton';
 import { ILocator } from '../services/locator/ILocator';
 import { Sample1Component } from './_samples/SampleComponent';
 import { Location } from './../router/Location';
-import { TasksTableComponent } from './DevicesListComponent';
+import { TasksTableComponent } from './TasksTableComponent';
 import { AddDeviceComponent } from './AddDeviceComponent';
 import { LocationData } from '../router/LocationData';
 import Button from 'material-ui/Button';
@@ -58,14 +58,14 @@ export class App extends React.Component<{}, {}>
             <IconButton color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
-            <Typography style={{ flex: 1 }} variant="title" color="inherit">
+            <Typography style={ { flex: 1 } } variant="title" color="inherit">
               Title
           </Typography>
             <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
         <Button variant="raised" color="primary">
-          Hello World
+          Hellooo World
         </Button>
 
         {/* <AppBar

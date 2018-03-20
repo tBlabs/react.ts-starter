@@ -64,7 +64,7 @@ describe(Locator.name, () =>
         expect(result.params).toBeUndefined();
     });
 
-    it('should return "NotFound" without params for to much data', () =>
+    it('should return "NotFound" without params for too much data', () =>
     {
         const result: LocationData = locator.ParseLocation('/route/too/much/data');
 
@@ -75,6 +75,15 @@ describe(Locator.name, () =>
     it('Is() works', () =>
     {
         locator.GoTo(Location.Home);
+
+        const result: boolean = locator.Is(Location.Home);
+
+        expect(result).toBeTruthy();
+    });
+
+    it('GoTo() returns /home on invalid url', () =>
+    {
+        locator.GoTo('aaa' as Location);
 
         const result: boolean = locator.Is(Location.Home);
 

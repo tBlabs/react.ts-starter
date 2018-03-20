@@ -29,16 +29,16 @@ export class TasksTableComponent extends React.Component<{}, {}>
         console.log('DEVICES LIST REF', this._tasksListPresenter.Items.length);
         return (
 
-            <div style={{ float: 'left', width: '80%', display: 'block' }}>
+            <div style={ { float: 'left', width: '80%', display: 'block' } }>
                 <Typography variant="title">
-                    Lista urządzeń
+                    Tasks list
                 </Typography>
                 <TextField
                     name="filter"
-                    value={this._tasksListPresenter.Filter$.value}
-                    onChange={(event) => this._tasksListPresenter.SetFilter((event.target as any).value)}
+                    value={ this._tasksListPresenter.Filter$.value }
+                    onChange={ (event) => this._tasksListPresenter.SetFilter((event.target as any).value) }
                 />
-                <Table style={{ width: '100%' }}>
+                <Table style={ { width: '100%' } }>
                     <TableHead>
                         <TableRow>
                             <TableCell></TableCell>
@@ -53,14 +53,14 @@ export class TasksTableComponent extends React.Component<{}, {}>
 
                         {
                             this._tasksListPresenter.Items.map((t: Task) => (
-                                <TableRow key={t.id}>
+                                <TableRow key={ t.id }>
                                     <TableCell padding="checkbox">
                                         <Checkbox
-                                            checked={true}
+                                            checked={ true }
                                         />
                                     </TableCell>
-                                    <TableCell>{t.text}</TableCell>
-                                    <TableCell>{t.isDone.toString()}</TableCell>
+                                    <TableCell>{ t.text }</TableCell>
+                                    <TableCell>{ t.isDone.toString() }</TableCell>
                                     <TableCell>1-1-2018</TableCell>
                                     <TableCell>
                                         <Button>EDIT</Button>
