@@ -39,9 +39,9 @@ export class TasksListStats extends React.Component<{}, {}>
     {
         return (
             <div>
-                Total: { this._listService.Items$.value.length } |
-                Filtered: { this._listPresenter.Items$.value.length } |
-                Done: { this._listPresenter.Items$.value.filter((i: Task) => i.isDone).length }
+                Total: {this._listService.Items.length} |
+                Filtered: {this._listPresenter.Items.length} |
+                Done: {this._listPresenter.Items.filter((i: Task) => i.isDone).length}
             </div>
         );
     }

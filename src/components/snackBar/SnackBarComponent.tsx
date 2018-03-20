@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Snackbar } from 'material-ui';
+import { Snackbar, IconButton } from 'material-ui';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { TextField } from 'material-ui';
 import { ISnackBar } from '../../services/snackBar/ISnackBar';
 import { Types } from '../../IoC/Types';
 import { LazyInject } from '../../IoC/IoC';
 import { Subscription } from 'rxjs';
+import CloseIcon from 'material-ui-icons/Close';
 
 interface SnackBarComponentState
 {
@@ -14,8 +15,7 @@ interface SnackBarComponentState
 
 export class SnackBarComponent extends React.Component<{}, SnackBarComponentState>
 {
-    @LazyInject(Types.ISnackBar)
-    private _snack: ISnackBar;
+    @LazyInject(Types.ISnackBar) private _snack: ISnackBar;
 
     constructor(props: {})
     {
@@ -45,22 +45,45 @@ export class SnackBarComponent extends React.Component<{}, SnackBarComponentStat
         this.setState({ visible: false });
     }
 
+    private Close_Clicked()
+    {
+        console.log('Close clicked');
+        this.setState({ visible: false });
+    }
+
     render()
     {
+        const messageText = <span>{this._snack.Text}</span>;
+        const closeButton =
+            <IconButton
+                key="close"
+                aria-label="Close"
+                color="inherit"
+                onClick={() => this.Close_Clicked()}
+            >
+                <CloseIcon />
+            </IconButton>;
+
         return (
             <Snackbar
-                open={ this.state.visible }
-                message={ this._snack.Text }
-                autoHideDuration={ 4200 }
-                onRequestClose={
-                    (reason: "timeout" | "clickaway") =>
+                open={this.state.visible}
+                action={[closeButton]}
+                message={messageText}
+                autoHideDuration={3000}
+                onClose={
+                    (event, reason) =>
                     {
                         this.setState({ visible: false });
                     }
                 }
-                action={ this._snack.ActionText }
-                onActionClick={ () => this.Snackbar_ActionClicked() }
             />
         );
     }
 }
+
+
+/*
+               action={ this._snack.ActionText }
+                onActionClick={ () => this.Snackbar_ActionClicked() }
+ 
+*/

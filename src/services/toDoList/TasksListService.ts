@@ -2,7 +2,7 @@ import { Task } from './../../models/Task';
 import { guid } from '../../types/guid';
 import { injectable } from "inversify";
 import 'reflect-metadata';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 import { ITasksListService } from './ITasksListService';
 
 @injectable()
@@ -27,6 +27,8 @@ export class TasksListService implements ITasksListService
 
     public async Add(itemName: string): Promise<void>
     {
+        console.log(itemName);
+
         const task: Task = new Task(itemName);
 
         this.AddExisting(task);
@@ -59,7 +61,7 @@ export class TasksListService implements ITasksListService
 
         if (taskIndex === (-1))
         {
-            throw new Error(`Task ${ id } not found`);
+            throw new Error(`Task ${id} not found`);
         }
 
         this.Items.splice(taskIndex, 1);
@@ -69,7 +71,7 @@ export class TasksListService implements ITasksListService
 
     public async SetText(id: guid, newName: string): Promise<void>
     {
-        const task = this.FindByIdOrThrow(id);
+        const task: Task = this.FindByIdOrThrow(id);
 
         task.text = newName;
 

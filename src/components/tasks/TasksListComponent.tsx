@@ -32,11 +32,10 @@ export class TasksListComponent extends React.Component<{}, {}>
             <div>
                 <TextField
                     name="filter"
-                    hintText="Filter"
-                    value={ this._tasksListPresenter.Filter$.value }
-                    onChange={ (event) => this._tasksListPresenter.SetFilter((event.target as any).value) }
+                    value={this._tasksListPresenter.Filter$.value}
+                    onChange={(event) => this._tasksListPresenter.SetFilter((event.target as any).value)}
                 />
-                { this._tasksListPresenter.Items.map((t: Task) => <TaskComponent key={ t.id } task={ t } />) }
+                {this._tasksListPresenter.Items.map((t: Task) => <TaskComponent key={t.id} task={t} />)}
             </div>
         );
     }

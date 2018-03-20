@@ -48,16 +48,14 @@
     "rxjs": "^5.5.7"
   },
   "devDependencies": {
-    "@types/base64url": "^2.0.0",
     "@types/enzyme": "^3.1.9",
-    "@types/inversify-inject-decorators": "^2.0.0",
     "@types/jasmine": "^2.8.6",
     "@types/jest": "^22.2.0",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "jest": "^23.0.0-alpha.0",
+    "jest": "^22.4.2",
     "parcel-bundler": "^1.6.2",
     "parcel-plugin-typescript": "^0.7.0",
     "prettier": "^1.11.1",

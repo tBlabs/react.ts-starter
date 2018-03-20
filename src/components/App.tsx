@@ -22,6 +22,8 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
+import { TaskAdderComponent } from './tasks/TaskAdderComponent';
+import { TasksListStats } from './tasks/TasksStats';
 
 
 export class App extends React.Component<{}, {}>
@@ -56,7 +58,7 @@ export class App extends React.Component<{}, {}>
             <IconButton color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
-            <Typography style={ { flex: 1 } } variant="title" color="inherit">
+            <Typography style={{ flex: 1 }} variant="title" color="inherit">
               Title
           </Typography>
             <Button color="inherit">Login</Button>
@@ -77,7 +79,11 @@ export class App extends React.Component<{}, {}>
         </Paper>
         <DevicesListComponent />
         <AddDeviceComponent />
-        <SnackBarComponent /> */}
+         */}
+        <TaskAdderComponent />
+        <DevicesListComponent />
+        <TasksListStats />
+        <SnackBarComponent />
       </div>
     );
   }

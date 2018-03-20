@@ -3,11 +3,10 @@ import { SampleService } from '../../services/_samples/SampleService';
 import * as React from 'react';
 import { TasksListService } from '../../services/toDoList/TasksListService';
 import { TasksListComponent } from './TasksListComponent';
-import { RaisedButton } from 'material-ui';
 import { MuiThemeProvider } from 'material-ui/styles';
-import { TextField } from 'material-ui';
 import { ISnackBar } from '../../services/snackBar/ISnackBar';
 import { LazyInject } from '../../IoC/IoC';
+import { TextField, Button } from 'material-ui';
 
 export class TaskAdderComponent extends React.PureComponent<{}, {}>
 {
@@ -25,24 +24,23 @@ export class TaskAdderComponent extends React.PureComponent<{}, {}>
             await this._tasksList.Add(newTaskText);
         }
     }
-
     render()
     {
-        let newTaskTextInput: TextField;
+        let newTaskInput: any;
 
         return (
             <div>
                 <hr />
                 <TextField
                     name="newTaskText"
-                    hintText="New task text"
                     defaultValue="default"
-                    ref={ (input: TextField) => { newTaskTextInput = input } }
+                    inputRef={i => newTaskInput = i}
                 />
-                <RaisedButton
-                    label="Add"
-                    onClick={ () => this.AddNewTaskButton_Clicked(newTaskTextInput.getValue()) }
-                />
+                <Button
+                    onClick={() => this.AddNewTaskButton_Clicked(newTaskInput.value)}
+                >
+                    Add
+                </Button>
                 <hr />
             </div>
         );
