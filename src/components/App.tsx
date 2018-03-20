@@ -13,7 +13,7 @@ import { JumpButton } from './jump/JumpButton';
 import { ILocator } from '../services/locator/ILocator';
 import { Sample1Component } from './_samples/SampleComponent';
 import { Location } from './../router/Location';
-import { DevicesListComponent } from './DevicesListComponent';
+import { TasksTableComponent } from './DevicesListComponent';
 import { AddDeviceComponent } from './AddDeviceComponent';
 import { LocationData } from '../router/LocationData';
 import Button from 'material-ui/Button';
@@ -81,7 +81,7 @@ export class App extends React.Component<{}, {}>
         <AddDeviceComponent />
          */}
         <TaskAdderComponent />
-        <DevicesListComponent />
+        <TasksTableComponent />
         <TasksListStats />
         <SnackBarComponent />
       </div>

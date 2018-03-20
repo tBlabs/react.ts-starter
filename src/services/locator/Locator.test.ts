@@ -1,3 +1,4 @@
+import { BrowserWindowMock } from './../browserWindow/BrowserWindowMock';
 import { Location } from './../../router/Location';
 import { Locator } from './Locator';
 import base64url from 'base64url';
@@ -10,7 +11,7 @@ describe(Locator.name, () =>
 
     beforeEach(() =>
     {
-        const window = new BrowserWindow();
+        const window = new BrowserWindowMock();
         locator = new Locator(window);
     });
 

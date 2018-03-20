@@ -19,7 +19,7 @@ export class Locator implements ILocator
         return this.Location$.value;
     }
 
-    constructor( @inject(Types.IBrowserWindow) private _window: IBrowserWindow)
+    constructor(@inject(Types.IBrowserWindow) private _window: IBrowserWindow)
     {
         this.ParseLocationAndSubmit(_window.CurrentUrl);
 
@@ -39,7 +39,7 @@ export class Locator implements ILocator
 
     public ParseLocation(url: string): LocationData
     {
-        if (url === '')
+        if ((url === undefined) || (url === ''))
         {
             return new LocationData(Location.Home);
         }

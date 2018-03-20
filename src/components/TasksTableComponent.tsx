@@ -7,7 +7,7 @@ import { ITasksListPresenter } from '../presenters/ITasksListPresenter';
 import { Task } from '../models/Task';
 
 
-export class DevicesListComponent extends React.Component<{}, {}>
+export class TasksTableComponent extends React.Component<{}, {}>
 {
     @LazyInject(Types.ITasksListPresenter) private _tasksListPresenter: ITasksListPresenter;
 
