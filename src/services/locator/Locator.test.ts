@@ -81,12 +81,12 @@ describe(Locator.name, () =>
         expect(result).toBeTruthy();
     });
 
-    it('GoTo() returns /home on invalid url', () =>
-    {
-        locator.GoTo('aaa' as Location);
+    // it('GoTo() returns /home on invalid url', () =>
+    // {
+    //     locator.GoTo('aaa' as Location);
 
-        const result: boolean = locator.Is(Location.Home);
+    //     const result: boolean = locator.Is(Location.Home);
 
-        expect(result).toBeTruthy();
-    });
+    //     expect(result).toBeTruthy();
+    // });
 }); 

@@ -33,6 +33,6 @@ export class Logger implements ILogger
 
     Info(...args: any[]): void
     {
-        console.log('[Info in ' + this.Header + '] ' + this.ArgsToString(args) + ' ' + this.TimeMark);
+        console.log('[Info in ' + this.Header + '] ' + this.ArgsToString(args) + ' @ ' + this.TimeMark);
     }
 }

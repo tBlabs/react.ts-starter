@@ -1,3 +1,4 @@
+import { AuthToken } from './../../models/auth/AuthToken';
 import { IMessageBus } from './../messageBus/IMessageBus';
 import { IStorage } from './../storage/IStorage';
 import { Types } from './../../IoC/Types';
@@ -20,8 +21,8 @@ export class AuthService implements IAuthService
     {
         const loginQuery: LoginQuery = new LoginQuery(credentials.email, credentials.password);
 
-        const token: token = await this._messageBus.Send(loginQuery);
+        const authToken: AuthToken = await this._messageBus.Send(loginQuery);
 
-        this._storage.AuthToken = token;
+        this._storage.AuthToken = authToken.token;
     }
 }

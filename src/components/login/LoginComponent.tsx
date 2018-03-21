@@ -5,10 +5,26 @@ import { LazyInject } from './../../IoC/IoC';
 import { Paper, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from 'material-ui';
 import { IAuthService } from '../../services/auth/IAuthService';
 import { Credentials } from '../../models/Credentials';
+// import { Ex  Code } from '../../exceptions/Exception';
 
-export class LoginComponent extends React.Component<{}, {}>
+interface LoginComponentState
+{
+    // emailInputError: boolean;
+    // passwordInputError: boolean;
+    problem: boolean;
+}
+
+export class LoginComponent extends React.Component<{}, LoginComponentState>
 {
     @LazyInject(Types.IAuthService) private _auth: IAuthService;
+
+    constructor()
+    {
+        super({});
+
+        // this.state = { emailInputError: false, passwordInputError: false };
+        this.state = { problem: false };
+    }
 
     private emailInput: any;
     private passwordInput: any;
@@ -17,7 +33,21 @@ export class LoginComponent extends React.Component<{}, {}>
     {
         const credentials: Credentials = new Credentials(this.emailInput.value, this.passwordInput.value);
 
-        await this._auth.Login(credentials);
+        try
+        {
+            await this._auth.Login(credentials);
+
+            this.setState({ problem: false });
+        }
+        catch (exception)
+        {
+            this.setState({ problem: true });
+        }
+    }
+
+    private get DialogTitle(): string
+    {
+        return 'Login' + (this.state.problem ? ' problem' : '');
     }
 
     render()
@@ -25,7 +55,7 @@ export class LoginComponent extends React.Component<{}, {}>
         return (
             <div>
                 <Dialog open={true}>
-                    <DialogTitle>Login</DialogTitle>
+                    <DialogTitle>{this.DialogTitle}</DialogTitle>
                     <DialogContent>
                         <TextField
                             name="email"
@@ -44,7 +74,7 @@ export class LoginComponent extends React.Component<{}, {}>
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button style={{ margin: '12px' }}
+                        <Button
                             variant="raised"
                             color="primary"
                             onClick={async () => await this.LoginButton_Clicked()}

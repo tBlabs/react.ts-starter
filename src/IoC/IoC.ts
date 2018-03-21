@@ -1,3 +1,4 @@
+import { MessageBusMock } from './../services/messageBus/MessageBusMock';
 import { Container } from "inversify";
 import { Types } from './Types';
 import "reflect-metadata";
@@ -49,7 +50,7 @@ IoC.bind(Types.IBrowserWindow).to(BrowserWindow);
 IoC.bind(Types.IWindowTitle).to(WindowTitle);
 
 IoC.bind<IAuthService>(Types.IAuthService).to(AuthService);
-IoC.bind<IMessageBus>(Types.IMessageBus).to(MessageBus);
+IoC.bind<IMessageBus>(Types.IMessageBus).to(MessageBusMock);
 IoC.bind<IHttp>(Types.IHttp).to(HttpMock);
 IoC.bind<IStorage>(Types.IStorage).to(Storage);
 IoC.bind<IAlert>(Types.IAlert).to(Alert);
