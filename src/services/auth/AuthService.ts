@@ -1,10 +1,10 @@
+import { IMessageBus } from './../messageBus/IMessageBus';
+import { IStorage } from './../storage/IStorage';
 import { Types } from './../../IoC/Types';
 import { IAuthService } from './IAuthService';
 import { injectable, inject } from 'inversify';
 import 'reflect-metadata';
 import { Credentials } from '../../models/Credentials';
-import { MessageBus } from './../messageBus/MessageBus';
-import { Storage } from './../storage/LocalStorage';
 import { LoginQuery } from './../../messages/auth/LoginQuery';
 import { token } from './../../types/token';
 
@@ -12,8 +12,8 @@ import { token } from './../../types/token';
 export class AuthService implements IAuthService
 {
     constructor(
-        @inject(Types.IMessageBus) private _messageBus: MessageBus,
-        @inject(Types.IStorage) private _storage: Storage)
+        @inject(Types.IMessageBus) private _messageBus: IMessageBus,
+        @inject(Types.IStorage) private _storage: IStorage)
     { }
 
     public async Login(credentials: Credentials): Promise<void>

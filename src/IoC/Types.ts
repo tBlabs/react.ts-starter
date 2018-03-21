@@ -15,5 +15,7 @@ export const Types =
         IMessageBus: Symbol("IMessageBus"),
         IAuthService: Symbol("IAuthService"),
         IHttp: Symbol("IHttp"),
+        IAlert: Symbol("IAlert"),
+        ILogger: Symbol("ILogger"),
         IStorage: Symbol("IStorage")
     };

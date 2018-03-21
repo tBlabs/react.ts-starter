@@ -2,7 +2,7 @@ import { inject } from 'inversify';
 import { Types } from '../../IoC/Types';
 import * as React from 'react';
 import { LazyInject } from './../../IoC/IoC';
-import { TextField, Button } from 'material-ui';
+import { Paper, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from 'material-ui';
 import { IAuthService } from '../../services/auth/IAuthService';
 import { Credentials } from '../../models/Credentials';
 
@@ -22,24 +22,38 @@ export class LoginComponent extends React.Component<{}, {}>
 
     render()
     {
-
         return (
             <div>
-                <TextField
-                    name="email"
-                    inputRef={inp => this.emailInput = inp}
-                />
-                <TextField
-                    name="password"
-                    inputRef={inp => this.passwordInput = inp}
-                />
-                <Button
-                    color="primary"
-                    onClick={async () => await this.LoginButton_Clicked()}
-                >
-                    Login
-                </Button>
-            </div>
+                <Dialog open={true}>
+                    <DialogTitle>Login</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            name="email"
+                            label="Email"
+                            margin="normal"
+                            defaultValue="e@mail.com"
+                            inputRef={inp => this.emailInput = inp}
+                        />
+                        <br />
+                        <TextField
+                            name="password"
+                            label="Password"
+                            margin="normal"
+                            defaultValue="password"
+                            inputRef={inp => this.passwordInput = inp}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button style={{ margin: '12px' }}
+                            variant="raised"
+                            color="primary"
+                            onClick={async () => await this.LoginButton_Clicked()}
+                        >
+                            Login
+                        </Button>
+                    </DialogActions>
+                </Dialog >
+            </div >
         );
     }
 }

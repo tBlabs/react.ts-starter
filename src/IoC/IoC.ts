@@ -3,6 +3,10 @@ import { Types } from './Types';
 import "reflect-metadata";
 import getDecorators from "inversify-inject-decorators";
 
+import { ILogger } from './../services/logger/ILogger';
+import { Logger } from './../services/logger/Logger';
+import { IAlert } from './../services/alert/IAlert';
+import { Alert } from './../services/alert/Alert';
 import { IHttp } from './../services/http/IHttp';
 import { IStorage } from './../services/storage/IStorage';
 import { HttpMock } from './../services/http/HttpMock';
@@ -30,7 +34,7 @@ import { TasksListPresenter } from '../presenters/TasksListPresenter';
 import { ILocatorParams } from "../services/locator/ILocatorParams";
 import { LocatorParams } from "../services/locator/LocatorParams";
 import { Http } from '../services/http/Http';
-import { Storage } from "../services/storage/LocalStorage";
+import { Storage } from "../services/storage/Storage";
 
 const IoC = new Container();
 
@@ -48,6 +52,8 @@ IoC.bind<IAuthService>(Types.IAuthService).to(AuthService);
 IoC.bind<IMessageBus>(Types.IMessageBus).to(MessageBus);
 IoC.bind<IHttp>(Types.IHttp).to(HttpMock);
 IoC.bind<IStorage>(Types.IStorage).to(Storage);
+IoC.bind<IAlert>(Types.IAlert).to(Alert);
+IoC.bind<ILogger>(Types.ILogger).to(Logger);
 
 
 const LazyInject = getDecorators(IoC).lazyInject;
