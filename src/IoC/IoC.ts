@@ -1,10 +1,17 @@
-import { BrowserWindow } from './../services/browserWindow/BrowserWindow';
-import { IBrowserWindow } from './../services/browserWindow/IBrowserWindow';
 import { Container } from "inversify";
 import { Types } from './Types';
 import "reflect-metadata";
 import getDecorators from "inversify-inject-decorators";
 
+import { IHttp } from './../services/http/IHttp';
+import { IStorage } from './../services/storage/IStorage';
+import { HttpMock } from './../services/http/HttpMock';
+import { IMessageBus } from './../services/messageBus/IMessageBus';
+import { MessageBus } from './../services/messageBus/MessageBus';
+import { IAuthService } from './../services/auth/IAuthService';
+import { BrowserWindow } from './../services/browserWindow/BrowserWindow';
+import { IBrowserWindow } from './../services/browserWindow/IBrowserWindow';
+import { AuthService } from './../services/auth/AuthService';
 import { WindowTitle } from './../services/title/WindowTitle';
 import { IWindowTitle } from './../services/title/IWindowTitle';
 import { ILocator } from './../services/locator/ILocator';
@@ -22,6 +29,8 @@ import { SampleComponentLocatorParams } from '../components/_samples/SampleCompo
 import { TasksListPresenter } from '../presenters/TasksListPresenter';
 import { ILocatorParams } from "../services/locator/ILocatorParams";
 import { LocatorParams } from "../services/locator/LocatorParams";
+import { Http } from '../services/http/Http';
+import { Storage } from "../services/storage/LocalStorage";
 
 const IoC = new Container();
 
@@ -34,6 +43,12 @@ IoC.bind<ITestComponentParams>(Types.ITestComponentParams).to(TestComponentParam
 IoC.bind<ILocatorParams<SampleComponentLocatorParams>>(Types.ILocatorParams).to(LocatorParams).inSingletonScope();
 IoC.bind(Types.IBrowserWindow).to(BrowserWindow);
 IoC.bind(Types.IWindowTitle).to(WindowTitle);
+
+IoC.bind<IAuthService>(Types.IAuthService).to(AuthService);
+IoC.bind<IMessageBus>(Types.IMessageBus).to(MessageBus);
+IoC.bind<IHttp>(Types.IHttp).to(HttpMock);
+IoC.bind<IStorage>(Types.IStorage).to(Storage);
+
 
 const LazyInject = getDecorators(IoC).lazyInject;
 

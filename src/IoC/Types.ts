@@ -1,3 +1,4 @@
+import { IAuthService } from './../services/auth/IAuthService';
 export const Types =
     {
         ISnackBar: Symbol("ISnackBar"),
@@ -10,5 +11,9 @@ export const Types =
         ITestComponentParams: Symbol("ITestComponentParams"),
         ITasksListPresenterToLocatorBinder: Symbol("ITasksListPresenterToLocatorBinder"),
         IWindowTitle: Symbol("IWindowTitle"),
-        IBrowserWindow: Symbol("IBrowserWindow")
+        IBrowserWindow: Symbol("IBrowserWindow"),
+        IMessageBus: Symbol("IMessageBus"),
+        IAuthService: Symbol("IAuthService"),
+        IHttp: Symbol("IHttp"),
+        IStorage: Symbol("IStorage")
     };

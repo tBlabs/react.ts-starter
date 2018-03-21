@@ -103,7 +103,7 @@ export class Locator implements ILocator
         this._window.Title = location;
         this._window.HistoryPush(url);
 
-        console.log('Manual jump to: ' + JSON.stringify(locationData));
+        // console.log('Manual jump to: ' + JSON.stringify(locationData));
         this.Location$.next(locationData);
     }
 
