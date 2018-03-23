@@ -6,7 +6,7 @@ export interface ILocator
 {
     Location$: BehaviorSubject<LocationData>;
     Location: LocationData;
-    GoTo(url: string, params?: any): void;
+    GoTo(url: Location, params?: any): void;
     ReplaceUrlParams(params: any): void;
     Is(location: Location): boolean;
 } 

@@ -16,4 +16,9 @@ export class StorageMock implements IStorage
     {
         return this.authToken;
     }
+
+    public DestroyAuthToken(): void
+    {
+        this.authToken = '';
+    }
 }

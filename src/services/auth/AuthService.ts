@@ -25,4 +25,14 @@ export class AuthService implements IAuthService
 
         this._storage.AuthToken = authToken.token;
     }
+
+    public Logout(): void
+    {
+        this._storage.DestroyAuthToken();
+    }
+
+    public get IsLoggedIn(): boolean
+    {
+        return this._storage.AuthToken !== '';
+    }
 }

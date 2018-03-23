@@ -2,27 +2,26 @@ import { inject } from 'inversify';
 import { Types } from '../../IoC/Types';
 import * as React from 'react';
 import { LazyInject } from './../../IoC/IoC';
-import { Paper, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from 'material-ui';
+import { Paper, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from 'material-ui';
 import { IAuthService } from '../../services/auth/IAuthService';
 import { Credentials } from '../../models/Credentials';
-// import { Ex  Code } from '../../exceptions/Exception';
+import { ILocator } from '../../services/locator/ILocator';
+import { Location } from './../../router/Location';
 
 interface LoginComponentState
 {
-    // emailInputError: boolean;
-    // passwordInputError: boolean;
     problem: boolean;
 }
 
 export class LoginComponent extends React.Component<{}, LoginComponentState>
 {
     @LazyInject(Types.IAuthService) private _auth: IAuthService;
+    @LazyInject(Types.ILocator) private _locator: ILocator;
 
     constructor()
     {
         super({});
 
-        // this.state = { emailInputError: false, passwordInputError: false };
         this.state = { problem: false };
     }
 
@@ -37,7 +36,7 @@ export class LoginComponent extends React.Component<{}, LoginComponentState>
         {
             await this._auth.Login(credentials);
 
-            this.setState({ problem: false });
+            this._locator.GoTo(Location.Devices);
         }
         catch (exception)
         {
@@ -53,8 +52,42 @@ export class LoginComponent extends React.Component<{}, LoginComponentState>
     render()
     {
         return (
-            <div>
-                <Dialog open={true}>
+            <div style={{ display: 'flex' }}>
+                <Paper style={{ padding: '30px 58px' }}>
+                    <Typography variant="headline" component="h3">
+                        {this.DialogTitle}
+                    </Typography>
+                    <TextField
+                        name="email"
+                        label="Email"
+                        margin="normal"
+                        defaultValue="e@mail.com"
+                        inputRef={inp => this.emailInput = inp}
+                    />
+                    <br />
+                    <TextField
+                        name="password"
+                        label="Password"
+                        margin="normal"
+                        defaultValue="password"
+                        inputRef={inp => this.passwordInput = inp}
+                    />
+                    <br />
+                    <Button
+                        variant="raised"
+                        color="primary"
+                        onClick={async () => await this.LoginButton_Clicked()}
+                    >
+                        Login
+                        </Button>
+                </Paper>
+            </div >
+        );
+    }
+}
+
+/*
+  <Dialog open={true}>
                     <DialogTitle>{this.DialogTitle}</DialogTitle>
                     <DialogContent>
                         <TextField
@@ -83,7 +116,4 @@ export class LoginComponent extends React.Component<{}, LoginComponentState>
                         </Button>
                     </DialogActions>
                 </Dialog >
-            </div >
-        );
-    }
-}
+*/

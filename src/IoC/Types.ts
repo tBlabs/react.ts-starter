@@ -14,6 +14,8 @@ export const Types =
         IBrowserWindow: Symbol("IBrowserWindow"),
         IMessageBus: Symbol("IMessageBus"),
         IAuthService: Symbol("IAuthService"),
+        IUsersService: Symbol("IUsersService"),
+        IUsersPresenter: Symbol("IUsersPresenter"),
         IHttp: Symbol("IHttp"),
         IAlert: Symbol("IAlert"),
         ILogger: Symbol("ILogger"),

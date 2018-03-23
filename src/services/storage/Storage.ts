@@ -12,6 +12,11 @@ export class Storage implements IStorage
         window.localStorage.setItem(this.AUTH, token);
     }
 
+    public DestroyAuthToken(): void
+    {
+        window.localStorage.removeItem(this.AUTH);
+    }
+
     public get AuthToken(): string
     {
         const value: string | null = window.localStorage.getItem(this.AUTH);

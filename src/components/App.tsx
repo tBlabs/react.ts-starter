@@ -25,12 +25,15 @@ import MenuIcon from 'material-ui-icons/Menu';
 import { TaskAdderComponent } from './tasks/TaskAdderComponent';
 import { LoginComponent } from './login/LoginComponent';
 import { TasksListStats } from './tasks/TasksStats';
+import { UsersListComponent } from './usersList/UsersListComponent';
+import { IAuthService } from '../services/auth/IAuthService';
 
 
 export class App extends React.Component<{}, {}>
 {
   @LazyInject(Types.ISnackBar) private _snack: ISnackBar;
   @LazyInject(Types.ILocator) private _locator: ILocator;
+  @LazyInject(Types.IAuthService) private _auth: IAuthService;
 
   // private locatorSubscription: Subscription;
 
@@ -50,25 +53,33 @@ export class App extends React.Component<{}, {}>
     // this.locatorSubscription.unsubscribe(  );
   }
 
+  private LogoutButton_Click()
+  {
+    this._auth.Logout();
+    this.forceUpdate();
+  }
+
   render()
   {
-    return (
-      <div>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography style={{ flex: 1 }} variant="title" color="inherit">
-              Title
+    if (!this._auth.IsLoggedIn) return <LoginComponent />;
+    else
+      return (
+        <div>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton color="inherit" aria-label="Menu">
+                <MenuIcon />
+              </IconButton>
+              <Typography style={{ flex: 1 }} variant="title" color="inherit">
+                Title
           </Typography>
-            <Button color="inherit">Login</Button>
-          </Toolbar>
-        </AppBar>
-        <LoginComponent />
-        <SnackBarComponent />
-      </div>
-    );
+              <Button color="inherit" onClick={() => this.LogoutButton_Click()}>Logout</Button>
+            </Toolbar>
+          </AppBar>
+          <UsersListComponent />
+          <SnackBarComponent />
+        </div>
+      );
   }
 }
 /*

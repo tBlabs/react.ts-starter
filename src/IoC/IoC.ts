@@ -1,9 +1,10 @@
-import { MessageBusMock } from './../services/messageBus/MessageBusMock';
 import { Container } from "inversify";
 import { Types } from './Types';
 import "reflect-metadata";
 import getDecorators from "inversify-inject-decorators";
 
+import { UsersService } from './../services/users/UsersService';
+import { MessageBusMock } from './../services/messageBus/MessageBusMock';
 import { ILogger } from './../services/logger/ILogger';
 import { Logger } from './../services/logger/Logger';
 import { IAlert } from './../services/alert/IAlert';
@@ -36,6 +37,7 @@ import { ILocatorParams } from "../services/locator/ILocatorParams";
 import { LocatorParams } from "../services/locator/LocatorParams";
 import { Http } from '../services/http/Http';
 import { Storage } from "../services/storage/Storage";
+import { UsersPresenter } from '../presenters/users/UsersPresenter';
 
 const IoC = new Container();
 
@@ -48,6 +50,8 @@ IoC.bind<ITestComponentParams>(Types.ITestComponentParams).to(TestComponentParam
 IoC.bind<ILocatorParams<SampleComponentLocatorParams>>(Types.ILocatorParams).to(LocatorParams).inSingletonScope();
 IoC.bind(Types.IBrowserWindow).to(BrowserWindow);
 IoC.bind(Types.IWindowTitle).to(WindowTitle);
+IoC.bind(Types.IUsersService).to(UsersService);
+IoC.bind(Types.IUsersPresenter).to(UsersPresenter);
 
 IoC.bind<IAuthService>(Types.IAuthService).to(AuthService);
 IoC.bind<IMessageBus>(Types.IMessageBus).to(MessageBusMock);
