@@ -1,23 +1,53 @@
+import { BehaviorSubject } from 'rxjs';
+import { IUsersService } from './IUsersService';
 import { IMessageBus } from './../messageBus/IMessageBus';
 import { User } from './../../models/User';
-import { IDataSource } from './../dataSource/IDataSource';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 
 @injectable()
-export class UsersService
+export class UsersService implements IUsersService
 {
     // constructor(private _messageBus: IMessageBus)
     // { }
 
-    public Users: User[] = [];
+    public Items$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
-    public async FetchAll(): Promise<User[]>
+    public async FetchAll(): Promise<void>
     {
-        return [
-            new User('1234', 'janusz', 'jan@com', new Date()),
-            new User('12345', 'pjoter', 'pjo@com', new Date())
-        ];
+        this.Items$.next([
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'pjoter@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'pjoter@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'tom@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+            new User('1234' + Math.random().toString(), 'janusz' + Math.random().toString(), 'jan@com', new Date()),
+        ]);
     }
 
 }

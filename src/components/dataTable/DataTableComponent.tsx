@@ -4,41 +4,51 @@ import { LazyInject } from '../../IoC/IoC';
 import { Types } from '../../IoC/Types';
 import { Subscription } from 'rxjs';
 import { User } from '../../models/User';
-import { IDataSource } from '../../services/dataSource/IDataSource';
 import { guid } from '../../types/guid';
 import { ReactNode } from 'react';
+import { IListPresenter } from '../../presenters/IListPresenter';
+import { IStorable } from './../../interfaces/IStorable';
 
 interface DataTableComponentProps<T>
 {
-    dataSource: ITablePresenter<T>;
+    listPresenter: IListPresenter<T>;
     fields: string[];
     headers: string[];
-    editWindow: (props: any) => ReactNode;
 }
 
-interface DataTableComponentState // xxx
-{
-    showEditWindow: boolean;
-}
-
-interface IStorable
-{
-    id: guid;
-}
-
-
-
-export class DataTableComponent<T extends IStorable> extends React.Component<DataTableComponentProps<T>, DataTableComponentState>
+export class ListComponent<T extends IStorable> extends React.Component<DataTableComponentProps<T>, {}>
 {
     constructor(props: DataTableComponentProps<T>)
     {
         super(props);
+    }
 
-        this.state = { showEditWindow: false };
+    private subscription: Subscription;
+
+    componentDidMount()
+    {
+        this.subscription = this.props.listPresenter.VisibleItems.subscribe(() => this.forceUpdate());
+    }
+
+    componentWillUnmount()
+    {
+        this.subscription.unsubscribe();
+    }
+
+    private Prev_Clicked()
+    {
+        this.props.listPresenter.Prev();
+    }
+
+    private Next_Clicked()
+    {
+        this.props.listPresenter.Next();
     }
 
     render()
     {
+        const presenter = this.props.listPresenter;
+
         return (
             <div>
                 <Table style={{ width: '100%' }}>
@@ -51,7 +61,7 @@ export class DataTableComponent<T extends IStorable> extends React.Component<Dat
                     </TableHead>
                     <TableBody>
                         {
-                            this.props.dataSource.Items.map((i: T) => (
+                            presenter.VisibleItems.value.map((i: T) => (
                                 <TableRow key={i.id} >
                                     {
                                         this.props.fields.map((f: keyof T) => (
@@ -73,14 +83,13 @@ export class DataTableComponent<T extends IStorable> extends React.Component<Dat
                     <TableFooter>
                         <TableRow>
                             <TableCell>
-                                <Button>Next</Button>
+                                Page: {presenter.Page}, Items: {presenter.FirstVisibleItemIndex} - {presenter.LastVisibleItemIndex}
+                                <Button onClick={() => this.Prev_Clicked()}>Prev</Button>
+                                <Button onClick={() => this.Next_Clicked()}>Next</Button>
                             </TableCell>
                         </TableRow>
                     </TableFooter>
                 </Table>
-                {
-                    this.dataSource.EditWindowIsVisible &&
-                    this.props.editWindow()}
             </div >
         );
     }

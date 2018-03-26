@@ -25,7 +25,7 @@ import MenuIcon from 'material-ui-icons/Menu';
 import { TaskAdderComponent } from './tasks/TaskAdderComponent';
 import { LoginComponent } from './login/LoginComponent';
 import { TasksListStats } from './tasks/TasksStats';
-import { UsersListComponent } from './usersList/UsersListComponent';
+import { UsersPageComponent } from './usersList/UsersPageComponent';
 import { IAuthService } from '../services/auth/IAuthService';
 
 
@@ -76,7 +76,7 @@ export class App extends React.Component<{}, {}>
               <Button color="inherit" onClick={() => this.LogoutButton_Click()}>Logout</Button>
             </Toolbar>
           </AppBar>
-          <UsersListComponent />
+          <UsersPageComponent />
           <SnackBarComponent />
         </div>
       );

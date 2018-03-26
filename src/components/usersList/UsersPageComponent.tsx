@@ -1,23 +1,27 @@
 import * as React from 'react';
-import { Typography, Button } from 'material-ui';
+import { TextField, Typography, Button } from 'material-ui';
 import { LazyInject } from '../../IoC/IoC';
 import { Types } from '../../IoC/Types';
 import { Subscription } from 'rxjs';
 import { User } from '../../models/User';
-import { DataTableComponent } from '../dataTable/DataTableComponent';
+import { ListComponent } from '../dataTable/DataTableComponent';
 import { UsersService } from '../../services/users/UsersService';
 import { IUsersPresenter } from '../../presenters/users/IUsersPresenter';
 import { UserEdit } from './UserEdit';
 
-export class UsersListComponent extends React.Component<{}, {}>
+export class UsersPageComponent extends React.Component<{}, {}>
 {
-    @LazyInject(Types.IUsersPresenter) private _usersPresenter: IUsersPresenter;
+    // @LazyInject(Types.IUsersService) private _usersService: IUsersService;
+    @LazyInject(Types.IUsersPresenter) private _usersListPresenter: IUsersPresenter;
+
+    // private subscription: Subscription;
 
     async componentDidMount()
     {
-        await this._usersPresenter.Init();
+        // this._usersListPresenter.UpdateRequired.subscribe(()=> this.forceUpdate());
 
-        this.forceUpdate();
+        await this._usersListPresenter.Init();
+
     }
 
     render()
@@ -28,13 +32,17 @@ export class UsersListComponent extends React.Component<{}, {}>
                     Users list
                 </Typography>
 
-                <DataTableComponent
-                    dataSource={this._usersPresenter}
+                <TextField
+                    label="Name"
+                    onChange={(event) => this._usersListPresenter.FilterByName(event.target.value)} />
+
+                <ListComponent
+                    listPresenter={this._usersListPresenter}
                     fields={['name', 'email', 'lastLoginTime']}
                     headers={['Nazwa', 'Email', 'Ostatnie logowanie']}
                 />
 
-                {this._userEdit.IsOpen && <UserEdit />}
+                {/* {this._userEdit.IsOpen && <UserEdit />} */}
 
                 <Button>Add</Button>
             </div>
