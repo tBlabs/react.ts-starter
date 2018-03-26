@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, TextField, Table, TableRow, TableHead, TableCell, TableBody, Checkbox, Button, TableFooter } from 'material-ui';
+import { Typography, TextField, Table, TableRow, TableHead, TableCell, TableBody, Checkbox, Button, TableFooter, TablePagination } from 'material-ui';
 import { LazyInject } from '../../IoC/IoC';
 import { Types } from '../../IoC/Types';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,7 @@ interface DataTableComponentProps<T>
     listPresenter: IListPresenter<T>;
     fields: string[];
     headers: string[];
+    onEditClick: (id: guid) => void;
 }
 
 export class ListComponent<T extends IStorable> extends React.Component<DataTableComponentProps<T>, {}>
@@ -71,7 +72,7 @@ export class ListComponent<T extends IStorable> extends React.Component<DataTabl
                                         ))
                                     }
                                     <TableCell>
-                                        <Button onClick={() => { this.setState({ showEditWindow: true }) }}>EDIT</Button>
+                                        <Button onClick={() => this.props.onEditClick(i.id)}>EDIT</Button>
                                     </TableCell>
                                     <TableCell>
                                         <Button color="primary">REMOVE</Button>
@@ -94,3 +95,20 @@ export class ListComponent<T extends IStorable> extends React.Component<DataTabl
         );
     }
 }
+
+/*
+    <TablePagination
+                                colSpan={6}
+                                count={presenter.Items.length}
+                                rowsPerPage={5}
+                                page={presenter.Page}
+                                backIconButtonProps={{
+                                    'aria-label': 'Previous Page',
+                                }}
+                                nextIconButtonProps={{
+                                    'aria-label': 'Next Page',
+                                }}
+                                onChangePage={() => this.Prev_Clicked()}
+                            />
+                            
+*/

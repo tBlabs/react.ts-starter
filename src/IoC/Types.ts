@@ -16,6 +16,7 @@ export const Types =
         IAuthService: Symbol("IAuthService"),
         IUsersService: Symbol("IUsersService"),
         IUsersPresenter: Symbol("IUsersPresenter"),
+        IUserEditPresenter: Symbol("IUserEditPresenter"),
         IHttp: Symbol("IHttp"),
         IAlert: Symbol("IAlert"),
         ILogger: Symbol("ILogger"),

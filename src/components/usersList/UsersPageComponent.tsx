@@ -8,20 +8,33 @@ import { ListComponent } from '../dataTable/DataTableComponent';
 import { UsersService } from '../../services/users/UsersService';
 import { IUsersPresenter } from '../../presenters/users/IUsersPresenter';
 import { UserEdit } from './UserEdit';
+import { IUserEditPresenter } from '../../presenters/users/IUserEditPresenter';
+import { guid } from '../../types/guid';
 
-export class UsersPageComponent extends React.Component<{}, {}>
+interface UsersPageState
 {
-    // @LazyInject(Types.IUsersService) private _usersService: IUsersService;
-    @LazyInject(Types.IUsersPresenter) private _usersListPresenter: IUsersPresenter;
+    isEditVisible: boolean;
+}
 
-    // private subscription: Subscription;
+export class UsersPageComponent extends React.Component<{}, UsersPageState>
+{
+    @LazyInject(Types.IUsersPresenter) private _usersListPresenter: IUsersPresenter;
+    @LazyInject(Types.IUserEditPresenter) private _userEditPresenter: IUserEditPresenter;
+
+    constructor(props: {})
+    {
+        super(props);
+        this.state = { isEditVisible: false };
+    }
 
     async componentDidMount()
     {
-        // this._usersListPresenter.UpdateRequired.subscribe(()=> this.forceUpdate());
-
         await this._usersListPresenter.Init();
 
+        this._userEditPresenter.IsVisible.subscribe((isVisible: boolean) =>
+        {
+            this.setState({ isEditVisible: isVisible });
+        });
     }
 
     render()
@@ -40,11 +53,12 @@ export class UsersPageComponent extends React.Component<{}, {}>
                     listPresenter={this._usersListPresenter}
                     fields={['name', 'email', 'lastLoginTime']}
                     headers={['Nazwa', 'Email', 'Ostatnie logowanie']}
+                    onEditClick={(id: guid) => this._userEditPresenter.Open(id)}
                 />
 
-                {/* {this._userEdit.IsOpen && <UserEdit />} */}
+                {this.state.isEditVisible && <UserEdit />}
 
-                <Button>Add</Button>
+                <Button onClick={() => this._userEditPresenter.Open('1234')}>Add</Button>
             </div>
         );
     }

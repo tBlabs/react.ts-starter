@@ -1,3 +1,4 @@
+import { UserEditPresenter } from './../presenters/users/UserEditPresenter';
 import { Container } from "inversify";
 import { Types } from './Types';
 import "reflect-metadata";
@@ -50,8 +51,9 @@ IoC.bind<ITestComponentParams>(Types.ITestComponentParams).to(TestComponentParam
 IoC.bind<ILocatorParams<SampleComponentLocatorParams>>(Types.ILocatorParams).to(LocatorParams).inSingletonScope();
 IoC.bind(Types.IBrowserWindow).to(BrowserWindow);
 IoC.bind(Types.IWindowTitle).to(WindowTitle);
-IoC.bind(Types.IUsersService).to(UsersService);
-IoC.bind(Types.IUsersPresenter).to(UsersPresenter);
+IoC.bind(Types.IUsersService).to(UsersService).inSingletonScope();
+IoC.bind(Types.IUsersPresenter).to(UsersPresenter).inSingletonScope();
+IoC.bind(Types.IUserEditPresenter).to(UserEditPresenter).inSingletonScope();
 
 IoC.bind<IAuthService>(Types.IAuthService).to(AuthService);
 IoC.bind<IMessageBus>(Types.IMessageBus).to(MessageBusMock);
