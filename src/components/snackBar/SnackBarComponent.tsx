@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { Snackbar, IconButton } from 'material-ui';
-import { MuiThemeProvider } from 'material-ui/styles';
-import { TextField } from 'material-ui';
+import { Snackbar, IconButton } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { ISnackBar } from '../../services/snackBar/ISnackBar';
 import { Types } from '../../IoC/Types';
 import { LazyInject } from '../../IoC/IoC';
 import { Subscription } from 'rxjs';
-import CloseIcon from 'material-ui-icons/Close';
 
 interface SnackBarComponentState
 {
@@ -53,23 +51,23 @@ export class SnackBarComponent extends React.Component<{}, SnackBarComponentStat
 
     render()
     {
-        const messageText = <span>{this._snack.Text}</span>;
+        const messageText = <span>{ this._snack.Text }</span>;
         const closeButton =
             <IconButton
                 key="close"
                 aria-label="Close"
                 color="inherit"
-                onClick={() => this.Close_Clicked()}
+                onClick={ () => this.Close_Clicked() }
             >
-                <CloseIcon />
+                x
             </IconButton>;
 
         return (
             <Snackbar
-                open={this.state.visible}
-                action={[closeButton]}
-                message={messageText}
-                autoHideDuration={3000}
+                open={ this.state.visible }
+                action={ [closeButton] }
+                message={ messageText }
+                autoHideDuration={ 3000 }
                 onClose={
                     (event, reason) =>
                     {

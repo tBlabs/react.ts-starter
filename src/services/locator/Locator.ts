@@ -1,7 +1,6 @@
 import { IBrowserWindow } from './../browserWindow/IBrowserWindow';
 import { LocationData } from './../../router/LocationData';
 import { Location } from './../../router/Location';
-import { IWindowTitle } from './../title/IWindowTitle';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { injectable, inject } from 'inversify';
 import 'reflect-metadata';

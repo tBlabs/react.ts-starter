@@ -20,5 +20,6 @@ export const Types =
         IHttp: Symbol("IHttp"),
         IAlert: Symbol("IAlert"),
         ILogger: Symbol("ILogger"),
-        IStorage: Symbol("IStorage")
+        IStorage: Symbol("IStorage"),
+        MessageBus: Symbol("MessageBus")
     };
